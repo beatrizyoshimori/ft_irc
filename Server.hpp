@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Server.hpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/29 19:10:30 by byoshimo          #+#    #+#             */
+/*   Updated: 2024/06/29 19:10:32 by byoshimo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SERVER_HPP
 # define SERVER_HPP
 
@@ -5,7 +17,7 @@
 
 class   Server
 {
-    private:
+	private:
         int					_serverPort;
         std::string			_serverPassword;
 		int					_socketFileDescriptor;

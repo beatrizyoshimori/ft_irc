@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Server.cpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/29 19:10:08 by byoshimo          #+#    #+#             */
+/*   Updated: 2024/06/29 19:10:10 by byoshimo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Server.hpp"
 
 void    Server::setPort(char *input)
@@ -105,7 +117,6 @@ void	Server::processClientsActivity(void)
 		Client &client = _clients[i];
 		if (detectedActivity(client.getFd()))
 		{
-			return ;
 			client.receiveData();
 			client.pushToCommandQueue();
 

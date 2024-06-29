@@ -1,6 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/29 19:10:19 by byoshimo          #+#    #+#             */
+/*   Updated: 2024/06/29 19:10:26 by byoshimo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_irc.hpp"
-#include <iostream>
 
 int	main(int argc, char **argv)
 {
@@ -13,6 +23,7 @@ int	main(int argc, char **argv)
 		server.setPort(argv[1]);
 		server.setPassword(argv[2]);
 		server.configureTCP();
+		server.start();
 	}
 	catch(const std::exception& e)
 	{

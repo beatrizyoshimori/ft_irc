@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Client.cpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/29 19:09:58 by byoshimo          #+#    #+#             */
+/*   Updated: 2024/06/29 19:10:01 by byoshimo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Client.hpp"
 
 Client::Client(int socketDescriptor)
@@ -21,7 +33,7 @@ std::queue<std::string>	Client::getCommandsQueue(void) const
 	return (this->_commandsQueue);
 }
 
-void    Client::receiveData(void)
+void	Client::receiveData(void)
 {
 	char	buff[BUFFER_SIZE];
 	std::memset(buff, 0, BUFFER_SIZE);
@@ -56,7 +68,7 @@ void	Client::pushToCommandQueue(void)
 	if (this->_data.empty())
 		return ;
 	std::vector<std::string>	commands = split(this->_data, CRLF);
-	if (commands.back().size() < 2 || commands.back().find(CRLF) == std::string::npos)
+	if (this->_data.size() < 2 || this->_data.find(CRLF) == std::string::npos)
 	{
 		this->_data = commands.back();
 		commands.pop_back();
