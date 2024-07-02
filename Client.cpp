@@ -45,30 +45,12 @@ void	Client::receiveData(void)
 		this->_data.append(buff, nbytes);
 }
 
-std::vector<std::string>	split(std::string str, std::string delimeter)
-{
-	std::vector<std::string>	tokens;
-
-	size_t	start = 0;
-	size_t	end;
-	size_t	del_size = delimeter.size();
-
-	while((end = str.find(delimeter, start)) != std::string::npos)
-	{
-		tokens.push_back(str.substr(start, end - start));
-		start = end + del_size;
-	}
-	tokens.push_back(str.substr(start));
-	tokens.erase(std::remove(tokens.begin(), tokens.end(), ""), tokens.end());
-	return (tokens);
-}
-
 void	Client::pushToCommandQueue(void)
 {
 	if (this->_data.empty())
 		return ;
-	std::vector<std::string>	commands = split(this->_data, CRLF);
-	if (this->_data.size() < 2 || this->_data.find(CRLF) == std::string::npos)
+	std::vector<std::string>	commands = Utils::split(this->_data, CRLF);
+	if (commands.back().size() < 2 || commands.back().find(CRLF) == std::string::npos)
 	{
 		this->_data = commands.back();
 		commands.pop_back();

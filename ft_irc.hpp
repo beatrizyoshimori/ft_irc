@@ -21,6 +21,7 @@
 
 #include <string>
 #include <cstring>
+#include <iostream>
 #include <sstream>
 #include <algorithm>
 #include <vector>
@@ -36,5 +37,6 @@ class	Client;
 
 #include "Client.hpp"
 #include "Server.hpp"
+#include "Utils.hpp"
 
 #endif
