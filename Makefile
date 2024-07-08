@@ -9,11 +9,13 @@ OBJECTS_PATH	=		objects/
 SOURCES			=		main.cpp \
 						Server.cpp \
 						Client.cpp \
+						Message.cpp \
 						Utils.cpp
 
 HEADERS			=		ft_irc.hpp \
 						Server.hpp \
 						Client.hpp \
+						Message.hpp \
 						Utils.hpp
 
 OBJECTS			=		$(patsubst %.cpp, $(OBJECTS_PATH)%.o, $(SOURCES))

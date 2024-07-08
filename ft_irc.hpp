@@ -37,6 +37,7 @@ class	Client;
 
 #include "Client.hpp"
 #include "Server.hpp"
+#include "Message.hpp"
 #include "Utils.hpp"
 
 #endif

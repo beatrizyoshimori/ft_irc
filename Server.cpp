@@ -125,6 +125,9 @@ void	Server::processClientsActivity(void)
 			{
 				std::string	line = commands.front();
 				commands.pop();
+
+				Message	msg;
+				msg.parseMessage(line);
 				
 			}
 		}
