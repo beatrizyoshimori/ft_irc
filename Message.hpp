@@ -8,7 +8,7 @@ class	Message
 	private:
 		std::string					prefix;
 		std::string					command;
-		std::vector<std::string>	params;	
+		std::vector<std::string>	params;
 
 	public:
 		Message(void) {};
