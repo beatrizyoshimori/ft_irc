@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 19:10:08 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/06/29 19:10:10 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/07/20 20:17:48 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	Server::defineServerAddress(void)
 
 void	Server::bindSocket(void)
 {
-	if (bind(_socketFileDescriptor, (sockaddr *)&_serverAddress, sizeof(_serverAddress)))
+	if (bind(_socketFileDescriptor, (sockaddr *)&_serverAddress, sizeof(_serverAddress)) < 0)
 		throw std::runtime_error("Failed to bind server file descriptor to socket.");
 }
 
@@ -80,8 +80,8 @@ void	Server::pollActiveConnections(void)
 
 void	Server::acceptNewClients(void)
 {
-	// if ((Server::_connectionsPollfds[0].revents & POLLIN) == POLLIN)
-	// {
+	if ((Server::_connectionsPollfds[0].revents & POLLIN) == POLLIN)
+	{
 		sockaddr_in	newClientAddress;
 		socklen_t	addressLength = sizeof(newClientAddress);
 		int	newClientSocketDescriptor = accept(this->_socketFileDescriptor, (sockaddr *) &newClientAddress, &addressLength);
@@ -94,7 +94,7 @@ void	Server::acceptNewClients(void)
 		
 		Client	newClient(newClientSocketDescriptor);
 		_clients.push_back(newClient);
-	// }
+	}
 }
 
 bool operator==(const pollfd &pollfd, const int &clientFd)
@@ -106,6 +106,11 @@ bool	Server::detectedActivity(const int &clientFd)
 {
 	std::vector<pollfd>::iterator pollfd = std::find(_connectionsPollfds.begin(), _connectionsPollfds.end(), clientFd);
 	return ((pollfd->revents & POLLIN) == POLLIN);
+}
+
+void	handle_message(Message msg)
+{
+	std::cout << "Received message: (prefix) " << msg.prefix << " (command) " << msg.command << std::endl;
 }
 
 void	Server::processClientsActivity(void)
@@ -128,7 +133,7 @@ void	Server::processClientsActivity(void)
 
 				Message	msg;
 				msg.parseMessage(line);
-				
+				handle_message(msg);
 			}
 		}
 	}

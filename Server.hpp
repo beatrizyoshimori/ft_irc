@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 19:10:30 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/06/29 19:10:32 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/07/20 20:19:42 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 #include "ft_irc.hpp"
 
-class   Server
+class	Server
 {
 	private:
-        int					_serverPort;
-        std::string			_serverPassword;
+		int					_serverPort;
+		std::string			_serverPassword;
 		int					_socketFileDescriptor;
 		sockaddr_in			_serverAddress;
 		std::vector<pollfd>	_connectionsPollfds;
@@ -34,12 +34,12 @@ class   Server
 		void		processClientsActivity(void);
 		bool		detectedActivity(const int &clientFd);
 
-    public:
+	public:
 		Server(void) {};
-        ~Server(void) {};
+		~Server(void) {};
 
-        void    setPort(char *input);
-        void	setPassword(char *input);
+		void	setPort(char *input);
+		void	setPassword(char *input);
 		void	configureTCP(void);
 		void	start(void);
 };
