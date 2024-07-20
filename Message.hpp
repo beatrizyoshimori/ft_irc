@@ -5,12 +5,11 @@
 
 class	Message
 {
-	private:
+	public:
 		std::string					prefix;
 		std::string					command;
 		std::vector<std::string>	params;
 
-	public:
 		Message(void) {};
 		~Message(void) {};
 

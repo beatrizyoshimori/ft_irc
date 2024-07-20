@@ -12,7 +12,7 @@ void	Message::parseMessage(std::string line)
 	this->params = Utils::split(line, " ");
 	this->command = params.front();
 	this->params.erase(this->params.begin());
-	if (params.back().find(':') != std::string::npos)
+	if (!params.empty() && params.back().find(':') != std::string::npos)
 		params.back().erase(0, 1);
 
 	// // Parse checking
