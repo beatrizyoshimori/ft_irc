@@ -33,6 +33,28 @@ std::queue<std::string>	Client::getCommandsQueue(void) const
 	return (this->_commandsQueue);
 }
 
+std::string	Client::getNick(void) const
+{
+	return (this->_nick);
+}
+
+std::string	Client::getUser(void) const
+{
+	return (this->_user);
+}
+
+std::string	Client::getPass(void) const
+{
+	return (this->_pass);
+}
+
+bool	Client::isAuthenticated() const
+{
+	if (this->_user.empty() || this->_nick.empty() || this->_pass.empty())
+		return false;
+	return true;
+}
+
 void	Client::receiveData(void)
 {
 	char	buff[BUFFER_SIZE];
@@ -49,8 +71,8 @@ void	Client::pushToCommandQueue(void)
 {
 	if (this->_data.empty())
 		return ;
-	std::vector<std::string>	commands = Utils::split(this->_data, CRLF);
-	if (commands.back().size() < 2 || commands.back().find(CRLF) == std::string::npos)
+	std::vector<std::string>	commands = Utils::split(this->_data, "\\r\\n");
+	if (this->_data.size() < 2 || this->_data[this->_data.size() - 2] != '\r' || this->_data[this->_data.size() - 1] != '\n')
 	{
 		this->_data = commands.back();
 		commands.pop_back();

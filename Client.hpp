@@ -21,6 +21,9 @@ class	Client
 		int			_fd;
 		bool		_removeClient;
 		std::string	_data;
+		std::string	_nick;
+		std::string	_user;
+		std::string	_pass;
 
 		std::queue<std::string>	_commandsQueue;
 
@@ -32,6 +35,11 @@ class	Client
 		int						getFd(void) const;
 		void					setRemoveClient(bool state);
 		std::queue<std::string>	getCommandsQueue(void) const;
+		std::string				getNick(void) const;
+		std::string				getUser(void) const;
+		std::string				getPass(void) const;
+
+		bool					isAuthenticated() const;
 
 		void	receiveData(void);
 		void	pushToCommandQueue(void);
