@@ -9,7 +9,7 @@ class	Utils
 		Utils(void);
 		~Utils(void);
 
-		static std::vector<std::string>	split(std::string str, std::string delimeter);
+		static std::vector<std::string>	split(std::string str, std::string delimiter);
 };
 
 #endif
