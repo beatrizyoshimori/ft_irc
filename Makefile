@@ -6,9 +6,11 @@ RM				=		rm -rf
 
 INCLUDES		=		-I ./includes/
 
+SRCS_PATH		=		srcs/
 OBJECTS_PATH	=		objects/
+VPATH			=		srcs:srcs/classes
 
-SOURCES			=		main.cpp \
+SOURCES			=		srcs/main.cpp \
 						Server.cpp \
 						Client.cpp \
 						Message.cpp \
@@ -18,7 +20,7 @@ OBJECTS			=		$(patsubst %.cpp, $(OBJECTS_PATH)%.o, $(SOURCES))
 
 all:					$(NAME)
 
-$(OBJECTS_PATH)%.o:		%.cpp $(HEADERS)
+$(OBJECTS_PATH)%.o:		%.cpp
 						@mkdir -p $(dir $@)
 						@$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
 
