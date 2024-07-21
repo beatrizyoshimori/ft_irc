@@ -4,6 +4,8 @@ CC				=		c++ -g3
 FLAGS			=		-Wall -Wextra -Werror -std=c++98
 RM				=		rm -rf
 
+INCLUDES		=		-I ./includes/
+
 OBJECTS_PATH	=		objects/
 
 SOURCES			=		main.cpp \
@@ -12,22 +14,16 @@ SOURCES			=		main.cpp \
 						Message.cpp \
 						Utils.cpp
 
-HEADERS			=		ft_irc.hpp \
-						Server.hpp \
-						Client.hpp \
-						Message.hpp \
-						Utils.hpp
-
 OBJECTS			=		$(patsubst %.cpp, $(OBJECTS_PATH)%.o, $(SOURCES))
 
 all:					$(NAME)
 
 $(OBJECTS_PATH)%.o:		%.cpp $(HEADERS)
 						@mkdir -p $(dir $@)
-						@$(CC) $(FLAGS) -c $< -o $@
+						@$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
 
 $(NAME):				$(OBJECTS)
-						@$(CC) $(FLAGS) $(OBJECTS) -o $@
+						@$(CC) $(FLAGS) $(INCLUDES) $(OBJECTS) -o $@
 						@echo "\033[32mircserv compiled!\033[0m"
 
 clean:
