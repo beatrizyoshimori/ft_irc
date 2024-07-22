@@ -9,6 +9,7 @@
 # define ERR_NONICKNAMEGIVEN()						(FTIRC + " 431 :No nickname given" + CRLF)
 # define ERR_ERRONEUSNICKNAME(nick)					(FTIRC + " 432 * " + nick + " :Nickname is invalid" + CRLF)
 # define ERR_NICKNAMEINUSE(nick)					(FTIRC + " 433 * " + nick + " :Nickname is already in use" + CRLF)
+# define ERR_NEEDMOREPARAMS(command, reason)        (FTIRC + " 461 * " + command + " :" + reason + CRLF)
 
 
 #endif
