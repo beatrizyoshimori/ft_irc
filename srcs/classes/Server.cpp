@@ -133,7 +133,10 @@ void	Server::processClientsActivity(void)
 
 				Message	msg;
 				msg.parseMessage(line);
-				handle_message(msg);
+
+				std::vector<Client>	broadcastList;
+				CommandArgs			cArgs(client, msg, clients, broadcastList, channels);
+				std::string	response = handle_message(cArgs);
 			}
 		}
 	}
