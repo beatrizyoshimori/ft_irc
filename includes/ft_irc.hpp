@@ -39,5 +39,8 @@ class	Client;
 #include "Server.hpp"
 #include "Message.hpp"
 #include "Utils.hpp"
+#include "Channel.hpp"
+#include "CommandArgs.hpp"
+#include "replies.hpp"
 
 #endif
