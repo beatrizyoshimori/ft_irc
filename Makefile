@@ -4,7 +4,7 @@ CC				=		c++ -g3
 FLAGS			=		-Wall -Wextra -Werror -std=c++98
 RM				=		rm -rf
 
-INCLUDES		=		-I ./includes/
+INCLUDES		=		-I ./includes/ -I ./includes/classes
 
 SRCS_PATH		=		srcs/
 OBJECTS_PATH	=		objects/
