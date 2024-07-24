@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 19:09:58 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/06/29 19:10:01 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/07/24 20:09:35 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 Client::Client(int socketDescriptor)
 {
-    this->_fd = socketDescriptor;
+	this->_fd = socketDescriptor;
 	this->_removeClient = false;
 }
 
 int Client::getFd(void) const
 {
-    return (this->_fd);
+	return (this->_fd);
 }
 
 void	Client::setRemoveClient(bool state)
@@ -38,9 +38,29 @@ std::string	Client::getNick(void) const
 	return (this->_nick);
 }
 
+void	Client::setNick(std::string nick)
+{
+	this->_nick = nick;
+}
+
 std::string	Client::getUser(void) const
 {
 	return (this->_user);
+}
+
+void	Client::setUser(std::string user)
+{
+	this->_user = user;
+}
+
+std::string	Client::getRealname(void) const
+{
+	return (this->_realname);
+}
+
+void	Client::setRealname(std::string realname)
+{
+	this->_realname = realname;
 }
 
 std::string	Client::getPass(void) const
@@ -74,6 +94,7 @@ void	Client::pushToCommandQueue(void)
 	std::vector<std::string>	commands = Utils::split(this->_data, "\\r\\n");
 	if (this->_data.size() < 2 || this->_data[this->_data.size() - 2] != '\r' || this->_data[this->_data.size() - 1] != '\n')
 	{
+		std::cout << "commands.back: ." << commands.back() << "." << std::endl;
 		this->_data = commands.back();
 		commands.pop_back();
 	}

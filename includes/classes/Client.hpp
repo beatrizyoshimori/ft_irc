@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 19:10:12 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/06/29 19:10:14 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/07/24 20:09:05 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@ class	Client
 		std::string	_data;
 		std::string	_nick;
 		std::string	_user;
+		std::string	_realname;
 		std::string	_pass;
 
 		std::queue<std::string>	_commandsQueue;
 
 	public:
-		Client(void);
+		Client(void) {};
 		Client(int socketDescriptor);
 		~Client(void) {};
 
@@ -36,7 +37,11 @@ class	Client
 		void					setRemoveClient(bool state);
 		std::queue<std::string>	&getCommandsQueue(void);
 		std::string				getNick(void) const;
+		void					setNick(std::string nick);
 		std::string				getUser(void) const;
+		void					setUser(std::string user);
+		std::string				getRealname(void) const;
+		void					setRealname(std::string realname);
 		std::string				getPass(void) const;
 
 		bool					isAuthenticated() const;
