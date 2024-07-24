@@ -46,7 +46,7 @@ void	Server::createSocket(void)
 
 void	Server::defineServerAddress(void)
 {
-	// std::memset(&_serverAddr, 0, sizeof(_serverAddr)); precisa?
+	std::memset(&_serverAddress, 0, sizeof(_serverAddress));
 	this->_serverAddress.sin_family = AF_INET;
 	this->_serverAddress.sin_port = htons(this->_serverPort);
 	this->_serverAddress.sin_addr.s_addr = INADDR_ANY;
@@ -108,11 +108,6 @@ bool	Server::detectedActivity(const int &clientFd)
 	return ((pollfd->revents & POLLIN) == POLLIN);
 }
 
-void	handle_message(Message msg)
-{
-	std::cout << "Received message: (prefix) " << msg.prefix << " (command) " << msg.command << std::endl;
-}
-
 void	Server::processClientsActivity(void)
 {
 	// if (_clients.empty())
@@ -135,8 +130,9 @@ void	Server::processClientsActivity(void)
 				msg.parseMessage(line);
 
 				std::vector<Client>	broadcastList;
-				CommandArgs			cArgs(client, msg, clients, broadcastList, channels);
-				std::string	response = handle_message(cArgs);
+				CommandArgs			cArgs(client, msg, this->_clients, broadcastList, this->_channels);
+				std::string	response = msg.handleMessage(cArgs);
+				// std::cout << response << std::endl;
 			}
 		}
 	}

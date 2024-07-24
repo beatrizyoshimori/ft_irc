@@ -18,12 +18,13 @@
 class	Server
 {
 	private:
-		int					_serverPort;
-		std::string			_serverPassword;
-		int					_socketFileDescriptor;
-		sockaddr_in			_serverAddress;
-		std::vector<pollfd>	_connectionsPollfds;
-		std::vector<Client>	_clients;
+		int						_serverPort;
+		std::string				_serverPassword;
+		int						_socketFileDescriptor;
+		sockaddr_in				_serverAddress;
+		std::vector<pollfd>		_connectionsPollfds;
+		std::vector<Client>		_clients;
+		std::vector<Channel>	_channels;
 
 		void		createSocket(void);
 		void		defineServerAddress(void);
