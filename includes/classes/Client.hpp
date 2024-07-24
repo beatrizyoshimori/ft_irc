@@ -34,7 +34,7 @@ class	Client
 
 		int						getFd(void) const;
 		void					setRemoveClient(bool state);
-		std::queue<std::string>	getCommandsQueue(void) const;
+		std::queue<std::string>	&getCommandsQueue(void);
 		std::string				getNick(void) const;
 		std::string				getUser(void) const;
 		std::string				getPass(void) const;

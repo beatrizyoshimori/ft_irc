@@ -28,7 +28,7 @@ void	Client::setRemoveClient(bool state)
 	this->_removeClient = state;
 }
 
-std::queue<std::string>	Client::getCommandsQueue(void) const
+std::queue<std::string>	&Client::getCommandsQueue(void)
 {
 	return (this->_commandsQueue);
 }
