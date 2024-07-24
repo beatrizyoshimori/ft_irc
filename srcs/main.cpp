@@ -19,6 +19,7 @@ int	main(int argc, char **argv)
 		if (argc != 3)
 			throw std::runtime_error("Error: wrong number of arguments!\nUsage: ./ircserv <port> <password>");
 
+		Commands::populateMap();
 		Server	server;
 		server.setPort(argv[1]);
 		server.setPassword(argv[2]);
