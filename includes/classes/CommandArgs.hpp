@@ -7,12 +7,12 @@ class	CommandArgs
 {
 	public:
 		Client					&client;
-		Message					msg;
+		Message					&msg;
 		std::vector<Client>		&clients;
 		std::vector<Client>		&broadcastList;
 		std::vector<Channel>	&channels;
 
-		CommandArgs(Client &client, Message msg, std::vector<Client> &clients, \
+		CommandArgs(Client &client, Message &msg, std::vector<Client> &clients, \
 			std::vector<Client> &broadcastList, std::vector<Channel> &channels) \
 			: client(client), msg(msg), clients(clients), broadcastList(broadcastList), channels(channels) {}
 		~CommandArgs(void) {}
