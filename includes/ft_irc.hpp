@@ -26,6 +26,7 @@
 #include <algorithm>
 #include <vector>
 #include <queue>
+#include <map>
 
 #include <sys/socket.h>
 #include <fcntl.h>
@@ -34,6 +35,10 @@
 
 class	Server;
 class	Client;
+class	Message;
+class	Channel;
+class	CommandArgs;
+class	Commands;
 
 #include "Client.hpp"
 #include "Server.hpp"
@@ -41,6 +46,7 @@ class	Client;
 #include "Utils.hpp"
 #include "Channel.hpp"
 #include "CommandArgs.hpp"
+#include "Commands.hpp"
 #include "replies.hpp"
 
 #endif
