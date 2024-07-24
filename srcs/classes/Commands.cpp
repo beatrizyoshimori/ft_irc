@@ -22,7 +22,6 @@ void	Commands::populateMap(void)
 
 std::string	Commands::callFunction(CommandArgs &cArgs)
 {
-	std::cout << "aqui" << std::endl;
 	//Check user authentication
 	if (_commands.find(cArgs.msg.command) == _commands.end())
 		return (cArgs.msg.command + " :Invalid command\r\n");
