@@ -13,7 +13,8 @@ class	Message
 		Message(void) {};
 		~Message(void) {};
 
-		void	parseMessage(std::string line);
+		void		parseMessage(std::string line);
+		std::string	handleMessage(CommandArgs &cArgs);
 };
 
 #endif

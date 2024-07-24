@@ -27,5 +27,5 @@ std::string	Message::handleMessage(CommandArgs &cArgs)
 {
 	if (cArgs.msg.params.size() > 15)
 		return (ERR_NEEDMOREPARAMS(cArgs.msg.command, "Too many params"));
-	// return (Commands::callFunction(cArgs));
+	return (Commands::callFunction(cArgs));
 }
