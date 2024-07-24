@@ -120,7 +120,7 @@ void	Server::processClientsActivity(void)
 			client.receiveData();
 			client.pushToCommandQueue();
 
-			std::queue<std::string>	commands = client.getCommandsQueue();
+			std::queue<std::string>	&commands = client.getCommandsQueue();
 			while(!commands.empty())
 			{
 				std::string	line = commands.front();
