@@ -8,13 +8,16 @@ INCLUDES		=		-I ./includes/ -I ./includes/classes
 
 SRCS_PATH		=		srcs/
 OBJECTS_PATH	=		objects/
-VPATH			=		srcs:srcs/classes
+VPATH			=		srcs:srcs/classes:srcs/commands
 
-SOURCES			=		srcs/main.cpp \
+SOURCES			=		main.cpp \
 						Server.cpp \
 						Client.cpp \
 						Message.cpp \
-						Utils.cpp
+						Channel.cpp \
+						Commands.cpp \
+						Utils.cpp \
+						USER.cpp
 
 OBJECTS			=		$(patsubst %.cpp, $(OBJECTS_PATH)%.o, $(SOURCES))
 
