@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 21:16:44 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/07/24 21:16:46 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/07/24 21:28:35 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ class	Commands
 };
 
 std::string	user(CommandArgs cArgs);
+std::string	nick(CommandArgs	cArgs);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 21:16:13 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/07/24 21:16:14 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/07/24 21:28:40 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ std::map<std::string, Commands::funcPtr> Commands::_commands;
 void	Commands::populateMap(void)
 {
 	_commands["USER"] = user;
-	// _commands["NICK"] = nick;
+	_commands["NICK"] = nick;
 	// _commands["PASS"] = pass;
 	// _commands["CAP"] = cap;
 	// _commands["QUIT"] = quit;

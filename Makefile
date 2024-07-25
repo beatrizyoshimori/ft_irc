@@ -17,7 +17,8 @@ SOURCES			=		main.cpp \
 						Channel.cpp \
 						Commands.cpp \
 						Utils.cpp \
-						USER.cpp
+						USER.cpp \
+						NICK.cpp
 
 OBJECTS			=		$(patsubst %.cpp, $(OBJECTS_PATH)%.o, $(SOURCES))
 
