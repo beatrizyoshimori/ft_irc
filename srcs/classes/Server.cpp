@@ -22,6 +22,11 @@ std::vector<Client>	Server::getClients(void) const
 	return (this->_clients);
 }
 
+std::vector<Channel>	Server::getChannels(void) const
+{
+	return (this->_channels);
+}
+
 void    Server::setPort(char *input)
 {
     std::istringstream  toInt(input);

@@ -44,8 +44,9 @@ class	Server
 		void	configureTCP(void);
 		void	start(void);
 
-		std::string			getServerPassword(void) const;
-		std::vector<Client>	getClients(void) const;
+		std::string				getServerPassword(void) const;
+		std::vector<Client>		getClients(void) const;
+		std::vector<Channel>	getChannels(void) const;
 };
 
 #endif
