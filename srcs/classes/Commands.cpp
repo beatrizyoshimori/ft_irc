@@ -20,7 +20,7 @@ void	Commands::populateMap(void)
 	_commands["NICK"] = nick;
 	_commands["PASS"] = pass;
 	// _commands["CAP"] = cap;
-	// _commands["QUIT"] = quit;
+	_commands["QUIT"] = quit;
 	// _commands["JOIN"] = join;
 	// _commands["LISTC"] = listc;
 	// _commands["PRIVMSG"] = privmsg;

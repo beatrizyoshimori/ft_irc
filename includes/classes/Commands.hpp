@@ -33,5 +33,6 @@ class	Commands
 std::string	user(CommandArgs cArgs);
 std::string	nick(CommandArgs cArgs);
 std::string	pass(CommandArgs cArgs);
+std::string	quit(CommandArgs cArgs);
 
 #endif
