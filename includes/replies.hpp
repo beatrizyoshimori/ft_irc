@@ -23,5 +23,6 @@
 # define ERR_NICKNAMEINUSE(nick)					(FTIRC + " 433 * " + nick + " :Nickname is already in use" + CRLF)
 # define ERR_NEEDMOREPARAMS(command, reason)		(FTIRC + " 461 * " + command + " :" + reason + CRLF)
 # define ERR_ALREADYREGISTRED(user)					(FTIRC + " 462 * " + user + ":User already registered)" + CRLF)
+# define ERR_PASSWDMISMATCH()						(FTIRC + " 464 * :Password incorrect" + CRLF)
 
 #endif
