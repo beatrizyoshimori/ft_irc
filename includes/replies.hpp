@@ -18,6 +18,7 @@
 
 # define RPL_WELCOME(nick, user)					(FTIRC + " 001 " + user + " :Welcome to the Internet Relay Chat " + nick + "!" + user + "@*" + CRLF)
 
+# define ERR_NOSUCHCHANNEL(channel)					(FTIRC + " 403 * " + channel + ":No such channel")
 # define ERR_NONICKNAMEGIVEN()						(FTIRC + " 431 :No nickname given" + CRLF)
 # define ERR_ERRONEUSNICKNAME(nick)					(FTIRC + " 432 * " + nick + " :Nickname is invalid" + CRLF)
 # define ERR_NICKNAMEINUSE(nick)					(FTIRC + " 433 * " + nick + " :Nickname is already in use" + CRLF)
