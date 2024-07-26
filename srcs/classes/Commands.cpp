@@ -18,7 +18,7 @@ void	Commands::populateMap(void)
 {
 	_commands["USER"] = user;
 	_commands["NICK"] = nick;
-	// _commands["PASS"] = pass;
+	_commands["PASS"] = pass;
 	// _commands["CAP"] = cap;
 	// _commands["QUIT"] = quit;
 	// _commands["JOIN"] = join;
