@@ -43,6 +43,9 @@ class	Server
 		void	setPassword(char *input);
 		void	configureTCP(void);
 		void	start(void);
+
+		std::string			getServerPassword(void) const;
+		std::vector<Client>	getClients(void) const;
 };
 
 #endif
