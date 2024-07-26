@@ -21,9 +21,9 @@ std::string	nick(CommandArgs	cArgs)
 		// cArgs.client.incrementRetries(); precisa?
 		return (ERR_ERRONEUSNICKNAME(cArgs.msg.params[0]));
 	}
-	for (size_t i = 0; i < cArgs.clients.size(); i++)
+	for (size_t i = 0; i < cArgs.server.getClients().size(); i++)
 	{
-		if (cArgs.clients[i].getNick() == cArgs.msg.params[0])
+		if (cArgs.server.getClients()[i].getNick() == cArgs.msg.params[0])
 		{
 			// cArgs.client.incrementRetries(); precisa?
 			return (ERR_NICKNAMEINUSE(cArgs.msg.params[0]));

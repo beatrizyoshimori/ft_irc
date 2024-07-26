@@ -12,6 +12,16 @@
 
 #include "Server.hpp"
 
+std::string	Server::getServerPassword(void) const
+{
+	return (this->_serverPassword);
+}
+
+std::vector<Client>	Server::getClients(void) const
+{
+	return (this->_clients);
+}
+
 void    Server::setPort(char *input)
 {
     std::istringstream  toInt(input);
@@ -130,7 +140,7 @@ void	Server::processClientsActivity(void)
 				msg.parseMessage(line);
 
 				std::vector<Client>	broadcastList;
-				CommandArgs			cArgs(client, msg, this->_clients, broadcastList, this->_channels);
+				CommandArgs			cArgs(client, msg, *this, broadcastList);
 				std::string	response = msg.handleMessage(cArgs);
 				// std::cout << response << std::endl;
 			}
