@@ -20,7 +20,21 @@ class	Channel
 	private:
 		std::string			_name;
 		std::string			_topic;
+		std::string			_key;
 		std::vector<Client>	_clients;
+
+	public:
+		Channel(void) {}
+		~Channel(void) {}
+
+		std::string	getName(void) const;
+		void		setName(std::string name);
+		std::string	getTopic(void) const;
+		void		setTopic(std::string topic);
+		std::string	getKey(void) const;
+		void		setKey(std::string key);
+
+		bool 		isClientOnChannel(const Client &client);
 };
 
 #endif
