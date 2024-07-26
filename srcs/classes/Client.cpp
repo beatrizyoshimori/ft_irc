@@ -68,6 +68,11 @@ std::string	Client::getPass(void) const
 	return (this->_pass);
 }
 
+void	Client::setPass(std::string pass)
+{
+	this->_pass = pass;
+}
+
 bool	Client::isAuthenticated() const
 {
 	if (this->_user.empty() || this->_nick.empty() || this->_pass.empty())

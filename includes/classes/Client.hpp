@@ -43,6 +43,7 @@ class	Client
 		std::string				getRealname(void) const;
 		void					setRealname(std::string realname);
 		std::string				getPass(void) const;
+		void					setPass(std::string pass);
 
 		bool					isAuthenticated() const;
 
