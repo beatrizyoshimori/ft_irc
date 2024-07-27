@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 19:58:45 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/07/19 20:03:23 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/07/26 21:29:37 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ class	Channel
 		std::string	getKey(void) const;
 		void		setKey(std::string key);
 
-		bool 		isClientOnChannel(const Client &client);
+		bool		isClientOnChannel(const Client &client);
 };
 
 #endif

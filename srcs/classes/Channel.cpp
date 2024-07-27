@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 19:58:42 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/07/19 19:58:44 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/07/26 21:29:25 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	Channel::setKey(std::string key)
 
 bool	Channel::isClientOnChannel(const Client &client)
 {
-    std::vector<Client>::iterator	it;
+	std::vector<Client>::iterator	it;
 	it = find(this->_clients.begin(), this->_clients.end(), client);
 	if (it == this->_clients.end())
 		return (false);
