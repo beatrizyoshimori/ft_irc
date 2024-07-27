@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 19:10:08 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/07/20 20:17:48 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/07/26 21:31:26 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ std::vector<Channel>	Server::getChannels(void) const
 	return (this->_channels);
 }
 
-void    Server::setPort(char *input)
+void	Server::setPort(char *input)
 {
-    std::istringstream  toInt(input);
+	std::istringstream	toInt(input);
 	int number;
 	toInt >> number;
 
@@ -147,7 +147,7 @@ void	Server::processClientsActivity(void)
 				std::vector<Client>	broadcastList;
 				CommandArgs			cArgs(client, msg, *this, broadcastList);
 				std::string	response = msg.handleMessage(cArgs);
-				// std::cout << response << std::endl;
+				std::cout << response << std::endl;
 			}
 		}
 	}
