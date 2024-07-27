@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 19:10:08 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/07/26 21:31:26 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/07/27 18:19:47 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ std::vector<Client>	Server::getClients(void) const
 std::vector<Channel>	Server::getChannels(void) const
 {
 	return (this->_channels);
+}
+
+void	Server::addChannel(Channel &channel)
+{
+	this->_channels.push_back(channel);
 }
 
 void	Server::setPort(char *input)
