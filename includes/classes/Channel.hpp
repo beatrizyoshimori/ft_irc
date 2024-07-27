@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 19:58:45 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/07/26 21:29:37 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/07/27 19:10:41 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,39 @@ class	Channel
 		std::string			_topic;
 		std::string			_key;
 		std::vector<Client>	_clients;
+		std::vector<Client>	_operators;
+		size_t				_userLimit;
+
+		bool				_i;
+		// bool				_t;
+		// bool				_k;
+		// bool				_o;
 
 	public:
-		Channel(void) {}
+		Channel(void);
+		Channel(std::string &name);
 		~Channel(void) {}
 
-		std::string	getName(void) const;
-		void		setName(std::string name);
-		std::string	getTopic(void) const;
-		void		setTopic(std::string topic);
-		std::string	getKey(void) const;
-		void		setKey(std::string key);
+		std::string			getName(void) const;
+		void				setName(std::string name);
+		std::string			getTopic(void) const;
+		void				setTopic(std::string topic);
+		std::string			getKey(void) const;
+		void				setKey(std::string key);
+		std::vector<Client>	getClients(void) const;
+		void				setClients(std::vector<Client> clients);
+		std::vector<Client>	getOperators(void) const;
+		void				addOperator(Client &client);
+		size_t				getUserLimit(void) const;
+		void				setUserLimit(size_t limit);
+		bool				getInviteOnly(void) const;
+		void				setInviteOnly(bool action);
 
-		bool		isClientOnChannel(const Client &client);
+		bool				isClientOnChannel(const Client &client);
+		void				addClient(Client &client);
+		std::string			getChannelUsers(void);
+
+		bool operator==(const std::string& str);
 };
 
 #endif
