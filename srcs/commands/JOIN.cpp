@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 18:14:52 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/07/26 18:14:52 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/07/26 21:32:13 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ std::string	join(CommandArgs cArgs)
 	// }
 	std::string					reply;
 	std::vector<std::string>	channels = Utils::split(cArgs.msg.params[0], ",");
-	std::queue<std::string>		keys;
-	if (cArgs.msg.params > 1)
+	std::vector<std::string>	keys;
+	if (cArgs.msg.params.size() > 1)
 		keys = Utils::split(cArgs.msg.params[1], ",");
 	for (size_t i = 0; i < channels.size(); i++)
 	{
@@ -32,17 +32,18 @@ std::string	join(CommandArgs cArgs)
 		if (!keys.empty())
 		{
 			channelKey = keys[i];
-			keys.pop();
+			keys.erase(keys.begin());
 		}
 		if (channelName[0] != '#' && channelName[0] != '&')
 		{
 			reply += ERR_NOSUCHCHANNEL(channelName);
 			continue ;
 		}
-		std::vector<Channel>::iterator	foundChannel = find(cArgs.server.getChannels().begin(), cArgs.server.getChannels().end(), channelName);
-		if (foundChannel != cArgs.server.getChannels().end())
+		std::vector<Channel>::iterator	it = find(cArgs.server.getChannels().begin(), cArgs.server.getChannels().end(), channelName);
+		Channel	&channel = *it;
+		if (it != cArgs.server.getChannels().end())
 		{
-			if (foundChannel.isClientOnChannel(cArgs.client))
+			if (channel.isClientOnChannel(cArgs.client))
 				continue ;
 			
 		}
