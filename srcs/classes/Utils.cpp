@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Utils.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lucade-s <lucade-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 21:16:01 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/07/24 21:17:50 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/07/27 19:28:07 by lucade-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ std::vector<std::string> Utils::split(std::string str, std::string delimiter)
 	tokens.push_back(str.substr(start));
 	tokens.erase(std::remove(tokens.begin(), tokens.end(), ""), tokens.end());
 	// std::cout << "tokens.back2: ." << tokens.back() << "." << std::endl;
+	tokens.pop_back();
 	return (tokens);
 }
