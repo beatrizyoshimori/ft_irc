@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 19:10:12 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/07/24 20:09:05 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/07/26 19:21:34 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,11 @@ class	Client
 
 		bool					isAuthenticated() const;
 
+		bool	operator==(const Client& obj);
+
 		void	receiveData(void);
 		void	pushToCommandQueue(void);
+
 };
 
 #endif

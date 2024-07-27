@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 19:09:58 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/07/24 20:09:35 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/07/26 19:42:25 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,11 @@ bool	Client::isAuthenticated() const
 	if (this->_user.empty() || this->_nick.empty() || this->_pass.empty())
 		return false;
 	return true;
+}
+
+bool Client::operator==(const Client& obj)
+{
+	return (this->_user == obj._user);
 }
 
 void	Client::receiveData(void)
