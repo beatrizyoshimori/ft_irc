@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 19:10:12 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/07/26 19:21:34 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/07/27 20:43:29 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ class	Client
 
 		void	receiveData(void);
 		void	pushToCommandQueue(void);
-
+		void	sendReply(std::string reply, std::vector<Client> broadcastList);
 };
 
 #endif

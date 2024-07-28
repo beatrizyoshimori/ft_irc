@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 19:09:58 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/07/26 19:42:25 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/07/27 21:13:05 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,4 +112,14 @@ void	Client::pushToCommandQueue(void)
 		this->_data.clear();
 	for (std::vector<std::string>::iterator command = commands.begin(); command != commands.end(); command++)
 		this->_commandsQueue.push(*command);
+}
+
+void	Client::sendReply(std::string reply, std::vector<Client> broadcastList)
+{
+	if (reply.empty() && broadcastList.empty())
+		return ;
+	std::vector<Client>::iterator	it = broadcastList.begin();
+	for (; it != broadcastList.end(); it++)
+		if (send((*it).getFd(), reply.c_str(), reply.length(), 0) == -1)
+			std::cerr << "Failed to send message to client." << std::endl;
 }
