@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 21:16:24 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/07/27 18:47:34 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/07/27 19:56:06 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define ERR_NONICKNAMEGIVEN()						(FTIRC + " 431 :No nickname given" + CRLF)
 # define ERR_ERRONEUSNICKNAME(nick)					(FTIRC + " 432 * " + nick + " :Nickname is invalid" + CRLF)
 # define ERR_NICKNAMEINUSE(nick)					(FTIRC + " 433 * " + nick + " :Nickname is already in use" + CRLF)
+# define ERR_NOTONCHANNEL(channel)					(FTIRC + " 442 * " + channel + " :Client not on channel" + CRLF)
 # define ERR_NEEDMOREPARAMS(command, reason)		(FTIRC + " 461 * " + command + " :" + reason + CRLF)
 # define ERR_ALREADYREGISTRED(user)					(FTIRC + " 462 * " + user + ":User already registered)" + CRLF)
 # define ERR_PASSWDMISMATCH()						(FTIRC + " 464 * :Password incorrect" + CRLF)
