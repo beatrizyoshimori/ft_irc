@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 19:58:42 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/07/27 19:09:56 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/07/27 20:01:30 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,17 @@ bool	Channel::isClientOnChannel(const Client &client)
 void	Channel::addClient(Client &client)
 {
 	this->_clients.push_back(client);
+}
+
+void	Channel::removeClient(Client &client)
+{
+	std::vector<Client>::iterator	itClient = find(this->_clients.begin(), this->_clients.end(), client);
+	std::vector<Client>::iterator	itOperator = find(this->_operators.begin(), this->_operators.end(), client);
+
+	if (itClient != this->_clients.end())
+		this->_clients.erase(itClient);
+	if (itOperator != this->_operators.end())
+		this->_operators.erase(itOperator);
 }
 
 std::string	Channel::getChannelUsers(void)

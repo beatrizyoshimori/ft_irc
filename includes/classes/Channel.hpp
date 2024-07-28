@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 19:58:45 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/07/27 19:10:41 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/07/27 20:01:26 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ class	Channel
 
 		bool				isClientOnChannel(const Client &client);
 		void				addClient(Client &client);
+		void				removeClient(Client &client);
 		std::string			getChannelUsers(void);
 
 		bool operator==(const std::string& str);
