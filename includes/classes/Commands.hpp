@@ -18,10 +18,10 @@
 class	Commands
 {
 	public:
-		typedef std::string (*funcPtr)(CommandArgs);
+		typedef void (*funcPtr)(CommandArgs);
 
-		static void			populateMap(void);
-		static std::string	callFunction(CommandArgs &cArgs);
+		static void	populateMap(void);
+		static void	callFunction(CommandArgs &cArgs);
 
 		Commands(void) {}
 		~Commands(void) {}
@@ -30,10 +30,11 @@ class	Commands
 		static std::map<std::string, funcPtr>	_commands;
 };
 
-std::string	user(CommandArgs cArgs);
-std::string	nick(CommandArgs cArgs);
-std::string	pass(CommandArgs cArgs);
-std::string	quit(CommandArgs cArgs);
-std::string	join(CommandArgs cArgs);
+void	user(CommandArgs cArgs);
+void	nick(CommandArgs cArgs);
+void	pass(CommandArgs cArgs);
+void	quit(CommandArgs cArgs);
+void	join(CommandArgs cArgs);
+void	part(CommandArgs cArgs);
 
 #endif

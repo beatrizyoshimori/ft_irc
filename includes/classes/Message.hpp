@@ -25,8 +25,8 @@ class	Message
 		Message(void) {};
 		~Message(void) {};
 
-		void		parseMessage(std::string line);
-		std::string	handleMessage(CommandArgs &cArgs);
+		void	parseMessage(std::string line);
+		void	handleMessage(CommandArgs &cArgs);
 };
 
 #endif
