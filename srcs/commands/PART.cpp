@@ -12,12 +12,11 @@
 
 #include "ft_irc.hpp"
 
-std::string	part(CommandArgs cArgs)
+void	part(CommandArgs cArgs)
 {
 	if (cArgs.msg.params.size() < 1 || cArgs.msg.params.size() > 2)
-		return (ERR_NEEDMOREPARAMS(cArgs.msg.command, "Wrong number of parameters"));
+		cArgs.client.sendReplyToClient(ERR_NEEDMOREPARAMS(cArgs.msg.command, "Wrong number of parameters"), cArgs.client);
 	
-	std::string					reply;
 	std::vector<std::string>	channels = Utils::split(cArgs.msg.params[0], ",");
 	std::string					message;
 	if (cArgs.msg.params.size() == 2)
@@ -27,22 +26,23 @@ std::string	part(CommandArgs cArgs)
 	for (size_t i = 0; i < channels.size(); i++)
 	{
 		std::string	channelName = channels[i];
+		// std::cout << "channel on server: ." << cArgs.server.getChannels().front().getName() << "." << std::endl;
+		// std::cout << "channelName: ." << channelName << "." << std::endl;
 		std::vector<Channel>::iterator	it = find(cArgs.server.getChannels().begin(), cArgs.server.getChannels().end(), channelName);
 		if (it == cArgs.server.getChannels().end())
 		{
-			// cArgs.client.sendReply(ERR_NOSUCHCHANNEL(channelName),)
-			// reply += ERR_NOSUCHCHANNEL(channelName);
+			cArgs.client.sendReplyToClient(ERR_NOSUCHCHANNEL(channelName), cArgs.client);
 			continue ;
 		}
 		if (!it->isClientOnChannel(cArgs.client))
 		{
-			reply += ERR_NOTONCHANNEL(channelName);
+			cArgs.client.sendReplyToClient(ERR_NOTONCHANNEL(channelName), cArgs.client);
 			continue ;
 		}
 		it->removeClient(cArgs.client);
 		if (it->getClients().empty())
 			cArgs.server.getChannels().erase(it);
-		
+		else
+			cArgs.client.sendReplyToBroadcastList(PART(cArgs.client.getNick(), cArgs.client.getUser(), channelName, message), it->getClients());
 	}
-	return (reply);
 }
