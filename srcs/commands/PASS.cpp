@@ -12,19 +12,18 @@
 
 #include "ft_irc.hpp"
 
-std::string	pass(CommandArgs cArgs)
+void	pass(CommandArgs cArgs)
 {
 	if (cArgs.msg.params.size() != 1)
-		return (ERR_NEEDMOREPARAMS(cArgs.msg.command, "Wrong number of parameters"));
+		cArgs.client.sendReplyToClient(ERR_NEEDMOREPARAMS(cArgs.msg.command, "Wrong number of parameters"), cArgs.client);
 	if (!cArgs.client.getPass().empty())
-		return (ERR_ALREADYREGISTRED(cArgs.client.getUser()));
+		cArgs.client.sendReplyToClient(ERR_ALREADYREGISTRED(cArgs.client.getUser()), cArgs.client);
 	cArgs.client.setPass(cArgs.msg.params[0]);
 	if (cArgs.client.getPass() != cArgs.server.getServerPassword())
 	{
 		cArgs.client.setRemoveClient(true);
-		return (ERR_PASSWDMISMATCH());
+		cArgs.client.sendReplyToClient(ERR_PASSWDMISMATCH(), cArgs.client);
 	}
 	if (cArgs.client.isAuthenticated())
-		return (RPL_WELCOME(cArgs.client.getNick(), cArgs.client.getUser()));
-	return ("");
+		cArgs.client.sendReplyToClient(RPL_WELCOME(cArgs.client.getNick(), cArgs.client.getUser()), cArgs.client);
 }

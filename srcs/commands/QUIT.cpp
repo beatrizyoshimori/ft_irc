@@ -12,8 +12,8 @@
 
 #include "ft_irc.hpp"
 
-std::string	quit(CommandArgs cArgs)
+void	quit(CommandArgs cArgs)
 {
 	cArgs.client.setRemoveClient(true);
-	return ("User has quit IRC");
+	cArgs.client.sendReplyToBroadcastList(QUIT(cArgs.client.getNick() ,cArgs.client.getUser()), cArgs.server.getClients());
 }

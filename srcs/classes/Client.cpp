@@ -99,12 +99,14 @@ void	Client::receiveData(void)
 
 void	Client::pushToCommandQueue(void)
 {
+	// this->_data.pop_back();
 	if (this->_data.empty())
 		return ;
-	std::vector<std::string>	commands = Utils::split(this->_data, "\\r\\n");
+	std::vector<std::string>	commands = Utils::split(this->_data, "\r\n");
+	// std::cout << "data.size: " << this->_data.size() << std::endl << "data[-2]: " << this->_data[this->_data.size() - 2] << std::endl << "data[-1]: " << this->_data[this->_data.size() - 1] << std::endl;
 	if (this->_data.size() < 2 || this->_data[this->_data.size() - 2] != '\r' || this->_data[this->_data.size() - 1] != '\n')
 	{
-		std::cout << "commands.back: ." << commands.back() << "." << std::endl;
+		// std::cout << "commands.back: ." << commands.back() << "." << std::endl << "commands.back size: " << commands.back().size() << std::endl;
 		this->_data = commands.back();
 		commands.pop_back();
 	}
@@ -114,12 +116,19 @@ void	Client::pushToCommandQueue(void)
 		this->_commandsQueue.push(*command);
 }
 
-void	Client::sendReply(std::string reply, std::vector<Client> broadcastList)
+void	Client::sendReplyToClient(std::string reply, Client client)
 {
-	if (reply.empty() && broadcastList.empty())
+	if (reply.empty())
+		return ;
+	if (send(client.getFd(), reply.c_str(), reply.length(), 0) == -1)
+		std::cerr << "Failed to send message to client." << std::endl;
+}
+
+void	Client::sendReplyToBroadcastList(std::string reply, std::vector<Client> broadcastList)
+{
+	if (broadcastList.empty())
 		return ;
 	std::vector<Client>::iterator	it = broadcastList.begin();
 	for (; it != broadcastList.end(); it++)
-		if (send((*it).getFd(), reply.c_str(), reply.length(), 0) == -1)
-			std::cerr << "Failed to send message to client." << std::endl;
+		sendReplyToClient(reply, *it);
 }

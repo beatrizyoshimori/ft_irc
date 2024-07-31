@@ -12,15 +12,14 @@
 
 #include "ft_irc.hpp"
 
-std::string	join(CommandArgs cArgs)
+void	join(CommandArgs cArgs)
 {
 	if (cArgs.msg.params.size() < 1 || cArgs.msg.params.size() > 2)
-		return (ERR_NEEDMOREPARAMS(cArgs.msg.command, "Wrong number of parameters"));
+		cArgs.client.sendReplyToClient(ERR_NEEDMOREPARAMS(cArgs.msg.command, "Wrong number of parameters"), cArgs.client);
 	// if (cArgs.msg.params[0] == "0")
 	// {
 	// 	//fazer command PART
 	// }
-	std::string					reply;
 	std::string					channelUsers;
 	std::string					channelTopic;
 	std::vector<std::string>	channels = Utils::split(cArgs.msg.params[0], ",");
@@ -38,7 +37,7 @@ std::string	join(CommandArgs cArgs)
 		}
 		if (channelName[0] != '#' && channelName[0] != '&')
 		{
-			reply += ERR_NOSUCHCHANNEL(channelName);
+			cArgs.client.sendReplyToClient(ERR_NOSUCHCHANNEL(channelName), cArgs.client);
 			continue ;
 		}
 		std::vector<Channel>::iterator	it = find(cArgs.server.getChannels().begin(), cArgs.server.getChannels().end(), channelName);
@@ -49,17 +48,17 @@ std::string	join(CommandArgs cArgs)
 				continue ;
 			if (channel.getInviteOnly()) // && !cArgs.client.channelOnInviteList(channelName)
 			{
-				reply += ERR_INVITEONLYCHAN(channelName);
+				cArgs.client.sendReplyToClient(ERR_INVITEONLYCHAN(channelName), cArgs.client);
 				continue ;
 			}
 			if (channel.getKey() != "" && channel.getKey() != channelKey)
 			{
-				reply += ERR_BADCHANNELKEY(channelName);
+				cArgs.client.sendReplyToClient(ERR_BADCHANNELKEY(channelName), cArgs.client);
 				continue ;
 			}
 			if (channel.getUserLimit() == channel.getClients().size())
 			{
-				reply += ERR_CHANNELISFULL(channelName);
+				cArgs.client.sendReplyToClient(ERR_CHANNELISFULL(channelName), cArgs.client);
 				continue ;
 			}
 			channel.addClient(cArgs.client);
@@ -69,6 +68,7 @@ std::string	join(CommandArgs cArgs)
 			channelTopic = channel.getTopic();
 			// if (cArgs.client.channelOnInviteList(channelName))
 			// 	cArgs.client.removeChannelFromInviteList(channelName);
+			cArgs.client.sendReplyToBroadcastList(JOIN(cArgs.client.getNick(), cArgs.client.getUser(), channelName), channel.getClients());
 		}
 		else
 		{
@@ -79,11 +79,11 @@ std::string	join(CommandArgs cArgs)
 				newChannel.setKey(channelKey);
 			channelUsers = newChannel.getChannelUsers();
 			cArgs.server.addChannel(newChannel);
+			cArgs.client.sendReplyToBroadcastList(JOIN(cArgs.client.getNick(), cArgs.client.getUser(), channelName), newChannel.getClients());
 		}
-		reply += (JOIN(cArgs.client.getUser(), channelName)) \
-		+ (channelTopic.empty() ? "" : RPL_TOPIC(cArgs.client.getNick(), channelName, channelTopic)) \
-		+ (RPL_NAMREPLY(cArgs.client.getNick(), channelName, channelUsers)) \
-		+ (RPL_ENDOFNAMES(cArgs.client.getNick(), channelName));
+		if (!channelTopic.empty())
+			cArgs.client.sendReplyToClient(RPL_TOPIC(cArgs.client.getNick(), channelName, channelTopic), cArgs.client);
+		cArgs.client.sendReplyToClient(RPL_NAMREPLY(cArgs.client.getNick(), channelName, channelUsers), cArgs.client);
+		cArgs.client.sendReplyToClient(RPL_ENDOFNAMES(cArgs.client.getNick(), channelName), cArgs.client);
 	}
-	return (reply);
 }

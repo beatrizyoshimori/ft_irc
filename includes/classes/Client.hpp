@@ -51,7 +51,8 @@ class	Client
 
 		void	receiveData(void);
 		void	pushToCommandQueue(void);
-		void	sendReply(std::string reply, std::vector<Client> broadcastList);
+		void	sendReplyToClient(std::string reply, Client client);
+		void	sendReplyToBroadcastList(std::string reply, std::vector<Client> broadcastList);
 };
 
 #endif

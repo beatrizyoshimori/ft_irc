@@ -12,16 +12,16 @@
 
 #include "ft_irc.hpp"
 
-std::string	user(CommandArgs cArgs)
+void	user(CommandArgs cArgs)
 {
 	if (cArgs.msg.params.size() != 4)
-		return (ERR_NEEDMOREPARAMS(cArgs.msg.command, "Not enough parameters"));
+		cArgs.client.sendReplyToClient(ERR_NEEDMOREPARAMS(cArgs.msg.command, "Not enough parameters"), cArgs.client);
 	for (size_t i = 0; i < cArgs.server.getClients().size(); i++)
 	{
 		if (cArgs.server.getClients()[i].getUser() == cArgs.msg.params[0])
 		{
 			cArgs.server.getClients()[i].setRemoveClient(true);
-			return (ERR_ALREADYREGISTRED(cArgs.server.getClients()[i].getUser()));
+			cArgs.client.sendReplyToClient(ERR_ALREADYREGISTRED(cArgs.server.getClients()[i].getUser()), cArgs.client);
 		}
 	}
 	if (cArgs.msg.params[3][0] == ':')
@@ -31,6 +31,5 @@ std::string	user(CommandArgs cArgs)
 	// if (cArgs.client.getRetries())
 	// 	return(""); precisa?
 	if (cArgs.client.isAuthenticated())
-		return (RPL_WELCOME(cArgs.client.getNick(), cArgs.client.getUser()));
-	return ("");
+		cArgs.client.sendReplyToClient(RPL_WELCOME(cArgs.client.getNick(), cArgs.client.getUser()), cArgs.client);
 }

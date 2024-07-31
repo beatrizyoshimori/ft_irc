@@ -35,9 +35,12 @@ void	Message::parseMessage(std::string line)
 	// std::cout << std::endl;
 }
 
-std::string	Message::handleMessage(CommandArgs &cArgs)
+void	Message::handleMessage(CommandArgs &cArgs)
 {
 	if (cArgs.msg.params.size() > 15)
-		return (ERR_NEEDMOREPARAMS(cArgs.msg.command, "Too many params"));
-	return (Commands::callFunction(cArgs));
+	{
+		cArgs.client.sendReplyToClient(ERR_NEEDMOREPARAMS(cArgs.msg.command, "Too many params"), cArgs.client);
+		return ;
+	}
+	Commands::callFunction(cArgs);
 }

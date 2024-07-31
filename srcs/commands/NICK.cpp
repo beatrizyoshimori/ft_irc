@@ -12,25 +12,24 @@
 
 #include "ft_irc.hpp"
 
-std::string	nick(CommandArgs	cArgs)
+void	nick(CommandArgs cArgs)
 {
 	if (cArgs.msg.params.size() != 1)
-		return (ERR_NONICKNAMEGIVEN());
+		cArgs.client.sendReplyToClient(ERR_NONICKNAMEGIVEN(), cArgs.client);
 	if (cArgs.msg.params[0].empty())
 	{
 		// cArgs.client.incrementRetries(); precisa?
-		return (ERR_ERRONEUSNICKNAME(cArgs.msg.params[0]));
+		cArgs.client.sendReplyToClient(ERR_ERRONEUSNICKNAME(cArgs.msg.params[0]), cArgs.client);
 	}
 	for (size_t i = 0; i < cArgs.server.getClients().size(); i++)
 	{
 		if (cArgs.server.getClients()[i].getNick() == cArgs.msg.params[0])
 		{
 			// cArgs.client.incrementRetries(); precisa?
-			return (ERR_NICKNAMEINUSE(cArgs.msg.params[0]));
+			cArgs.client.sendReplyToClient(ERR_NICKNAMEINUSE(cArgs.msg.params[0]), cArgs.client);
 		}
 	}
 	cArgs.client.setNick(cArgs.msg.params[0]);
 	if (cArgs.client.isAuthenticated())
-		return (RPL_WELCOME(cArgs.client.getNick(), cArgs.client.getUser()));
-	return ("");
+		cArgs.client.sendReplyToClient(RPL_WELCOME(cArgs.client.getNick(), cArgs.client.getUser()), cArgs.client);
 }
