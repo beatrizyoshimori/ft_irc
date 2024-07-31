@@ -149,8 +149,7 @@ void	Server::processClientsActivity(void)
 				Message	msg;
 				msg.parseMessage(line);
 
-				std::vector<Client>	broadcastList;
-				CommandArgs			cArgs(client, msg, *this, broadcastList);
+				CommandArgs			cArgs(client, msg, *this);
 				msg.handleMessage(cArgs);
 			}
 		}

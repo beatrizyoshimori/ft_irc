@@ -21,10 +21,9 @@ class	CommandArgs
 		Client					&client;
 		Message					&msg;
 		Server					&server;
-		std::vector<Client>		&broadcastList;
 
-		CommandArgs(Client &client, Message &msg, Server &server, std::vector<Client> &broadcastList) \
-			: client(client), msg(msg), server(server), broadcastList(broadcastList) {}
+		CommandArgs(Client &client, Message &msg, Server &server) \
+			: client(client), msg(msg), server(server) {}
 		~CommandArgs(void) {}
 };
 

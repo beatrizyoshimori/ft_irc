@@ -63,8 +63,6 @@ void	join(CommandArgs cArgs)
 			}
 			channel.addClient(cArgs.client);
 			channelUsers = channel.getChannelUsers();
-			for (size_t i = 0; i < channel.getClients().size(); i++)
-				cArgs.broadcastList.push_back(channel.getClients()[i]);
 			channelTopic = channel.getTopic();
 			// if (cArgs.client.channelOnInviteList(channelName))
 			// 	cArgs.client.removeChannelFromInviteList(channelName);
