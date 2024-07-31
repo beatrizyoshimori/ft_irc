@@ -23,6 +23,11 @@ int Client::getFd(void) const
 	return (this->_fd);
 }
 
+bool	Client::getRemoveClient(void) const
+{
+	return (this->_removeClient);
+}
+
 void	Client::setRemoveClient(bool state)
 {
 	this->_removeClient = state;
