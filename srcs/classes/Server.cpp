@@ -128,6 +128,18 @@ bool	Server::detectedActivity(const int &clientFd)
 	return ((pollfd->revents & POLLIN) == POLLIN);
 }
 
+void	Server::disconnectClient(Client &client)
+{
+	for (size_t i = 0; i < this->_channels.size(); i++)
+		this->_channels[i].removeClient(client);
+	close(client.getFd());
+	this->_connectionsPollfds.erase(find(this->_connectionsPollfds.begin(), this->_connectionsPollfds.end(), client.getFd()));
+	std::vector<Client>::iterator	it;
+	it = find(this->_clients.begin(), this->_clients.end(), client);
+	this->_clients.erase(it);
+	// Client::decrementIdCounter();
+}
+
 void	Server::processClientsActivity(void)
 {
 	// if (_clients.empty())
@@ -152,6 +164,8 @@ void	Server::processClientsActivity(void)
 				CommandArgs			cArgs(client, msg, *this);
 				msg.handleMessage(cArgs);
 			}
+			if (client.getRemoveClient())
+				disconnectClient(client);
 		}
 	}
 }

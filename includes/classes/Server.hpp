@@ -34,6 +34,7 @@ class	Server
 		void		acceptNewClients(void);
 		void		processClientsActivity(void);
 		bool		detectedActivity(const int &clientFd);
+		void		disconnectClient(Client &client);
 
 	public:
 		Server(void) {};
