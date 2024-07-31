@@ -21,7 +21,8 @@ SOURCES			=		main.cpp \
 						NICK.cpp \
 						PASS.cpp \
 						QUIT.cpp \
-						JOIN.cpp
+						JOIN.cpp \
+						PART.cpp
 
 OBJECTS			=		$(patsubst %.cpp, $(OBJECTS_PATH)%.o, $(SOURCES))
 
