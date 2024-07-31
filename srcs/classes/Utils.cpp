@@ -24,11 +24,8 @@ std::vector<std::string> Utils::split(std::string str, std::string delimiter)
 	{
 		tokens.push_back(str.substr(start, end - start));
 		start = end + del_size;
-		// std::cout << "tokens.back: ." << tokens.back() << "." << std::endl;
 	}
-	tokens.push_back(str.substr(start));
+	tokens.push_back(str.substr(start, end));
 	tokens.erase(std::remove(tokens.begin(), tokens.end(), ""), tokens.end());
-	// std::cout << "tokens.back2: ." << tokens.back() << "." << std::endl;
-	tokens.pop_back();
 	return (tokens);
 }
