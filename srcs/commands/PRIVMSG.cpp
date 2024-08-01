@@ -44,7 +44,6 @@ void	privmsg(CommandArgs cArgs)
 			cArgs.client.sendReplyToClient(ERR_NOSUCHNICK(cArgs.client.getNick(), recipient), cArgs.client);
 			return ;
 		}
-			std::cout << cArgs.msg.params[0] << std::endl;
 		cArgs.client.sendReplyToClient(PRIVMSG(cArgs.client.getNick(), cArgs.client.getUser(), recipient, cArgs.msg.params[1]), *itClient);
 	}
 }
