@@ -36,5 +36,6 @@ void	pass(CommandArgs cArgs);
 void	quit(CommandArgs cArgs);
 void	join(CommandArgs cArgs);
 void	part(CommandArgs cArgs);
+void	privmsg(CommandArgs cArgs);
 
 #endif

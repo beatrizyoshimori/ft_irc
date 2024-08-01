@@ -23,7 +23,7 @@ void	Commands::populateMap(void)
 	_commands["QUIT"] = quit;
 	_commands["JOIN"] = join;
 	// _commands["LISTC"] = listc;
-	// _commands["PRIVMSG"] = privmsg;
+	_commands["PRIVMSG"] = privmsg;
 	// _commands["KICK"] = kick;
 	_commands["PART"] = part;
 	// _commands["WHO"] = who;
