@@ -18,6 +18,24 @@ Channel::Channel(void) : _i(false) {}
 Channel::Channel(std::string &name) : _name(name), _i(false) {}
 // Channel::Channel(std::string &name) : _name(name), _i(false), _t(false), _k(false), _o(false) {}
 
+Channel&	Channel::operator=(const Channel &obj)
+{
+	if (this != &obj)
+	{
+		this->_name = obj._name;
+		this->_topic = obj._topic;
+		this->_key = obj._key;
+		this->_clients = obj._clients;
+		this->_operators = obj._operators;
+		this->_userLimit = obj._userLimit;
+		this->_i = obj._i;
+		// this->_t = obj._t;
+		// this->_k = obj._k;
+		// this->_o = obj._o;
+	}
+	return (*this);
+}
+
 std::string	Channel::getName(void) const
 {
 	return (this->_name);

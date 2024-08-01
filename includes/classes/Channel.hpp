@@ -34,6 +34,7 @@ class	Channel
 		Channel(void);
 		Channel(std::string &name);
 		~Channel(void) {}
+		Channel&	operator=(const Channel &obj);
 
 		std::string			getName(void) const;
 		void				setName(std::string name);
