@@ -49,6 +49,7 @@ class	Client
 		bool					isAuthenticated() const;
 
 		bool	operator==(const Client& obj);
+		bool	operator==(const std::string& str);
 
 		void	receiveData(void);
 		void	pushToCommandQueue(void);

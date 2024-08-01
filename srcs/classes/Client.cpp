@@ -90,6 +90,11 @@ bool Client::operator==(const Client& obj)
 	return (this->_user == obj._user);
 }
 
+bool Client::operator==(const std::string& str)
+{
+	return (this->_user == str);
+}
+
 void	Client::receiveData(void)
 {
 	char	buff[BUFFER_SIZE];
