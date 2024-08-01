@@ -47,4 +47,3 @@ void	privmsg(CommandArgs cArgs)
 		cArgs.client.sendReplyToClient(PRIVMSG(cArgs.client.getNick(), cArgs.client.getUser(), recipient, cArgs.msg.params[1]), *itClient);
 	}
 }
-
