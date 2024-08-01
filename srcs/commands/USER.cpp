@@ -15,7 +15,10 @@
 void	user(CommandArgs cArgs)
 {
 	if (cArgs.msg.params.size() != 4)
+	{
 		cArgs.client.sendReplyToClient(ERR_NEEDMOREPARAMS(cArgs.msg.command, "Not enough parameters"), cArgs.client);
+		return ;
+	}
 	for (size_t i = 0; i < cArgs.server.getClients().size(); i++)
 	{
 		if (cArgs.server.getClients()[i].getUser() == cArgs.msg.params[0])

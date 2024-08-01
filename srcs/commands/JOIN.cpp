@@ -15,7 +15,10 @@
 void	join(CommandArgs cArgs)
 {
 	if (cArgs.msg.params.size() < 1 || cArgs.msg.params.size() > 2)
+	{
 		cArgs.client.sendReplyToClient(ERR_NEEDMOREPARAMS(cArgs.msg.command, "Wrong number of parameters"), cArgs.client);
+		return ;
+	}
 	// if (cArgs.msg.params[0] == "0")
 	// {
 	// 	//fazer command PART

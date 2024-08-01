@@ -15,14 +15,21 @@
 void	pass(CommandArgs cArgs)
 {
 	if (cArgs.msg.params.size() != 1)
+	{
 		cArgs.client.sendReplyToClient(ERR_NEEDMOREPARAMS(cArgs.msg.command, "Wrong number of parameters"), cArgs.client);
+		return ;
+	}
 	if (!cArgs.client.getPass().empty())
+	{
 		cArgs.client.sendReplyToClient(ERR_ALREADYREGISTRED(cArgs.client.getUser()), cArgs.client);
+		return ;
+	}
 	cArgs.client.setPass(cArgs.msg.params[0]);
 	if (cArgs.client.getPass() != cArgs.server.getServerPassword())
 	{
 		cArgs.client.setRemoveClient(true);
 		cArgs.client.sendReplyToClient(ERR_PASSWDMISMATCH(), cArgs.client);
+		return ;
 	}
 	if (cArgs.client.isAuthenticated())
 		cArgs.client.sendReplyToClient(RPL_WELCOME(cArgs.client.getNick(), cArgs.client.getUser()), cArgs.client);

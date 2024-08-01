@@ -15,11 +15,15 @@
 void	nick(CommandArgs cArgs)
 {
 	if (cArgs.msg.params.size() != 1)
+	{
 		cArgs.client.sendReplyToClient(ERR_NONICKNAMEGIVEN(), cArgs.client);
+		return ;
+	}
 	if (cArgs.msg.params[0].empty())
 	{
 		// cArgs.client.incrementRetries(); precisa?
 		cArgs.client.sendReplyToClient(ERR_ERRONEUSNICKNAME(cArgs.msg.params[0]), cArgs.client);
+		return ;
 	}
 	for (size_t i = 0; i < cArgs.server.getClients().size(); i++)
 	{
