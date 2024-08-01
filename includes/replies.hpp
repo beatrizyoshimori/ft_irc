@@ -21,7 +21,11 @@
 # define RPL_NAMREPLY(nick, channel, names)			(FTIRC + " 353 " + nick + " = " + channel + " :" + names + CRLF)
 # define RPL_ENDOFNAMES(nick, channel)				(FTIRC + " 366 " + nick + " " + channel + " :End of NAMES list" + CRLF)
 
+# define ERR_NOSUCHNICK(nick, recipient)			(FTIRC + " 401 * " + nick + " " + recipient + " :No such nick/channel" + CRLF)
 # define ERR_NOSUCHCHANNEL(channel)					(FTIRC + " 403 * " + channel + ":No such channel" + CRLF)
+# define ERR_CANNOTSENDTOCHAN(nick, channel)		(FTIRC + " 404 * " + nick + " " + channel + " :Cannot send to channel" + CRLF)
+# define ERR_NORECIPIENT(nick, command)				(FTIRC + " 411 * " + nick + " :No recipient given (" + command + ")" + CRLF)
+# define ERR_NOTEXTTOSEND(nick)						(FTIRC + " 412 * " + nick + " :No text to send" + CRLF)
 # define ERR_NONICKNAMEGIVEN()						(FTIRC + " 431 :No nickname given" + CRLF)
 # define ERR_ERRONEUSNICKNAME(nick)					(FTIRC + " 432 * " + nick + " :Nickname is invalid" + CRLF)
 # define ERR_NICKNAMEINUSE(nick)					(FTIRC + " 433 * " + nick + " :Nickname is already in use" + CRLF)
@@ -36,5 +40,6 @@
 # define JOIN(nick, user, channel)					(":" + nick + "!" + user + "@* JOIN " + channel + CRLF)
 # define QUIT(nick, user)							(":" + nick + "!" + user + "@* QUIT : User has quit IRC" + CRLF)
 # define PART(nick, user, channel, message)			(":" + nick + "!" + user + "@* PART :" + channel + " :" + message + CRLF)
+# define PRIVMSG(nick, user, recipient, message)	(":" + nick + "!" + user + "@* PRIVMSG " + recipient + " :" + message + CRLF)
 
 #endif
