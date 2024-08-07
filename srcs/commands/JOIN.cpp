@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 18:14:52 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/07/27 19:11:10 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/08/07 19:40:40 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,20 @@ void	join(CommandArgs cArgs)
 		cArgs.client.sendReplyToClient(ERR_NEEDMOREPARAMS(cArgs.msg.command, "Wrong number of parameters"), cArgs.client);
 		return ;
 	}
-	// if (cArgs.msg.params[0] == "0")
-	// {
-	// 	//fazer command PART
-	// }
+	if (cArgs.msg.params[0] == "0")
+	{
+		cArgs.msg.params[0].clear();
+		for (size_t i = 0; i < cArgs.server.getChannels().size(); i++)
+		{
+			if (cArgs.server.getChannels()[i].isClientOnChannel(cArgs.client))
+			{
+				cArgs.msg.params[0].append(cArgs.server.getChannels()[i].getName());
+				cArgs.msg.params[0].append(",");
+			}
+		}
+		part(cArgs);
+		return ;
+	}
 	std::string					channelUsers;
 	std::string					channelTopic;
 	std::vector<std::string>	channels = Utils::split(cArgs.msg.params[0], ",");
