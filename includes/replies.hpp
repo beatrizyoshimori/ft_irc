@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 21:16:24 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/07/27 19:56:06 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/08/10 20:00:08 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define ERR_NONICKNAMEGIVEN()						(FTIRC + " 431 :No nickname given" + CRLF)
 # define ERR_ERRONEUSNICKNAME(nick)					(FTIRC + " 432 * " + nick + " :Nickname is invalid" + CRLF)
 # define ERR_NICKNAMEINUSE(nick)					(FTIRC + " 433 * " + nick + " :Nickname is already in use" + CRLF)
+# define ERR_USERNOTINCHANNEL(nick, channel)		(FTIRC + " 441 * " + nick + " " + channel + ": They aren't on that channel" + CRLF)
 # define ERR_NOTONCHANNEL(channel)					(FTIRC + " 442 * " + channel + " :Client not on channel" + CRLF)
 # define ERR_NEEDMOREPARAMS(command, reason)		(FTIRC + " 461 * " + command + " :" + reason + CRLF)
 # define ERR_ALREADYREGISTRED(user)					(FTIRC + " 462 * " + user + ":User already registered" + CRLF)
@@ -36,10 +37,13 @@
 # define ERR_CHANNELISFULL(channel)					(FTIRC + " 471 * " + channel + ":Cannot join channel (Channel is full)" + CRLF)
 # define ERR_INVITEONLYCHAN(channel)				(FTIRC + " 473 * " + channel + ":Cannot join channel (Invite only channel)" + CRLF)
 # define ERR_BADCHANNELKEY(channel)					(FTIRC + " 475 * " + channel + ":Cannot join channel (Incorrect password)" + CRLF)
+# define ERR_CHANOPRIVSNEEDED(channel)				(FTIRC + " 482 * " + channel + ":You're not channel operator" + CRLF)
 
 # define JOIN(nick, user, channel)					(":" + nick + "!" + user + "@* JOIN " + channel + CRLF)
 # define QUIT(nick, user)							(":" + nick + "!" + user + "@* QUIT : User has quit IRC" + CRLF)
 # define PART(nick, user, channel, message)			(":" + nick + "!" + user + "@* PART :" + channel + " :" + message + CRLF)
 # define PRIVMSG(nick, user, recipient, message)	(":" + nick + "!" + user + "@* PRIVMSG " + recipient + " :" + message + CRLF)
+# define KICK(nick, user, channel, message)			(":" + nick + "!" + user + "@* KICK " + channel + " :" + message + CRLF)
+# define ERR_CANNOTKICKYOURSELF(nick)				(FTIRC + " " + nick + " :Cannot kick yourself" + CRLF)
 
 #endif
