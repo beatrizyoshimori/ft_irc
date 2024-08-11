@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 21:16:44 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/07/27 18:55:38 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/08/10 20:21:46 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ void	quit(CommandArgs cArgs);
 void	join(CommandArgs cArgs);
 void	part(CommandArgs cArgs);
 void	privmsg(CommandArgs cArgs);
+void	kick(CommandArgs cArgs);
 
 #endif
