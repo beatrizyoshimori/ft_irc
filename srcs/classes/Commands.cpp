@@ -29,7 +29,7 @@ void	Commands::populateMap(void)
 	// _commands["WHO"] = who;
 	// _commands["MODE"] = mode;
 	// _commands["TOPIC"] = topic;
-	// _commands["INVITE"] = invite;
+	_commands["INVITE"] = invite;
 }
 
 void	Commands::callFunction(CommandArgs &cArgs)
