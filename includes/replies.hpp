@@ -18,6 +18,7 @@
 
 # define RPL_WELCOME(nick, user)						(FTIRC + " 001 " + user + " :Welcome to the Internet Relay Chat " + nick + "!" + user + "@*" + CRLF)
 # define RPL_TOPIC(nick, channel, topic)				(FTIRC + " 332 " + nick + " " + channel + " :" + topic + CRLF)
+# define RPL_INVITING(nick, recipient, channel)			(FTIRC + " 341 " + nick + " " + recipient + " :" + channel + CRLF)
 # define RPL_NAMREPLY(nick, channel, names)				(FTIRC + " 353 " + nick + " = " + channel + " :" + names + CRLF)
 # define RPL_ENDOFNAMES(nick, channel)					(FTIRC + " 366 " + nick + " " + channel + " :End of NAMES list" + CRLF)
 
