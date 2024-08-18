@@ -26,7 +26,7 @@ class	Channel
 		size_t				_userLimit;
 
 		bool				_i;
-		// bool				_t;
+		bool				_t;
 		// bool				_k;
 		// bool				_o;
 
@@ -50,6 +50,8 @@ class	Channel
 		void				setUserLimit(size_t limit);
 		bool				getInviteOnly(void) const;
 		void				setInviteOnly(bool action);
+		bool				getTopicOPOnly(void) const;
+		void				setTopicOPOnly(bool action);
 
 		bool				isClientOnChannel(const Client &client);
 		bool				isOperator(const Client &client);

@@ -12,10 +12,10 @@
 
 #include "Channel.hpp"
 
-Channel::Channel(void) : _i(false) {}
+Channel::Channel(void) : _i(false), _t(false) {}
 // Channel::Channel(void) : _i(false), _t(false), _k(false), _o(false) {}
 
-Channel::Channel(std::string &name) : _name(name), _i(false) {}
+Channel::Channel(std::string &name) : _name(name), _i(false), _t(false) {}
 // Channel::Channel(std::string &name) : _name(name), _i(false), _t(false), _k(false), _o(false) {}
 
 Channel&	Channel::operator=(const Channel &obj)
@@ -104,6 +104,16 @@ bool	Channel::getInviteOnly(void) const
 void	Channel::setInviteOnly(bool action)
 {
 	this->_i = action;
+}
+
+bool	Channel::getTopicOPOnly(void) const
+{
+	return (this->_t);
+}
+
+void	Channel::setTopicOPOnly(bool action)
+{
+	this->_t = action;
 }
 
 bool	Channel::isClientOnChannel(const Client &client)
