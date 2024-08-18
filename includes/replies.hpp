@@ -17,6 +17,7 @@
 # define CRLF std::string("\r\n")
 
 # define RPL_WELCOME(nick, user)						(FTIRC + " 001 " + user + " :Welcome to the Internet Relay Chat " + nick + "!" + user + "@*" + CRLF)
+# define RPL_NOTOPIC(nick, channel)						(FTIRC + " 331 " + nick + " " + channel + " :No topic is set" + CRLF)
 # define RPL_TOPIC(nick, channel, topic)				(FTIRC + " 332 " + nick + " " + channel + " :" + topic + CRLF)
 # define RPL_INVITING(nick, recipient, channel)			(FTIRC + " 341 " + nick + " " + recipient + " :" + channel + CRLF)
 # define RPL_NAMREPLY(nick, channel, names)				(FTIRC + " 353 " + nick + " = " + channel + " :" + names + CRLF)
@@ -48,5 +49,6 @@
 # define KICK(nick, user, channel, message)				(":" + nick + "!" + user + "@* KICK " + channel + " :" + message + CRLF)
 # define ERR_CANNOTKICKYOURSELF(nick)					(FTIRC + " " + nick + " :Cannot kick yourself" + CRLF)
 # define RPL_INVITEMSG(nick, user, recipient, channel)	(":" + nick + "!" + user + "@* INVITE " + recipient + " :" + channel + CRLF)
+# define TOPICMSG(nick, user, channel, topic)			(":" + nick + "!" + user + "@* TOPIC " + channel + " :" + topic + CRLF)
 
 #endif
