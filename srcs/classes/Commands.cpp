@@ -28,7 +28,7 @@ void	Commands::populateMap(void)
 	_commands["PART"] = part;
 	// _commands["WHO"] = who;
 	// _commands["MODE"] = mode;
-	// _commands["TOPIC"] = topic;
+	_commands["TOPIC"] = topic;
 	_commands["INVITE"] = invite;
 }
 

@@ -39,5 +39,6 @@ void	part(CommandArgs cArgs);
 void	privmsg(CommandArgs cArgs);
 void	kick(CommandArgs cArgs);
 void	invite(CommandArgs cArgs);
+void	topic(CommandArgs cArgs);
 
 #endif

@@ -25,7 +25,8 @@ SOURCES			=		main.cpp \
 						PART.cpp \
 						PRIVMSG.cpp \
 						KICK.cpp \
-						INVITE.cpp
+						INVITE.cpp \
+						TOPIC.cpp
 
 OBJECTS			=		$(patsubst %.cpp, $(OBJECTS_PATH)%.o, $(SOURCES))
 
