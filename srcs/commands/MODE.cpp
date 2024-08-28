@@ -1,4 +1,5 @@
 #include "ft_irc.hpp"
+#include <utility>
 
 void	mode(CommandArgs cArgs)
 {
@@ -20,9 +21,24 @@ void	mode(CommandArgs cArgs)
 		cArgs.client.sendReplyToClient(ERR_NOTONCHANNEL(channelName), cArgs.client);
 		return ;
 	}
-
 	if (cArgs.msg.params.size() == 1)
 	{
-		
+		cArgs.client.sendReplyToClient(RPL_CHANNELMODEIS(cArgs.client.getNick(), channelName, itChannel->getModes()), cArgs.client);
+		return ;
+	}
+	if (!itChannel->isOperator(cArgs.client))
+	{
+		cArgs.client.sendReplyToClient(ERR_CHANOPRIVSNEEDED(channelName), cArgs.client);
+		return ;
+	}
+
+	std::map<
+	std::vector<std::string>	modes;
+	std::vector<std::string>	modesParams;
+	for (size_t i = 1; i < cArgs.msg.params.size(); i++)
+	{
+		if (cArgs.msg.params[i][0] == '+' || cArgs.msg.params[i][0] == '-')
+			modes.push_back(cArgs.msg.params[i]);
+		else
 	}
 }
