@@ -12,11 +12,9 @@
 
 #include "Channel.hpp"
 
-Channel::Channel(void) : _i(false), _t(false) {}
-// Channel::Channel(void) : _i(false), _t(false), _k(false), _o(false) {}
+Channel::Channel(void) : _i(false), _t(false), _k(false), _l(false) {}
 
-Channel::Channel(std::string &name) : _name(name), _i(false), _t(false) {}
-// Channel::Channel(std::string &name) : _name(name), _i(false), _t(false), _k(false), _o(false) {}
+Channel::Channel(std::string &name) : _name(name), _i(false), _t(false), _k(false), _l(false) {}
 
 Channel&	Channel::operator=(const Channel &obj)
 {
@@ -29,9 +27,9 @@ Channel&	Channel::operator=(const Channel &obj)
 		this->_operators = obj._operators;
 		this->_userLimit = obj._userLimit;
 		this->_i = obj._i;
-		// this->_t = obj._t;
-		// this->_k = obj._k;
-		// this->_o = obj._o;
+		this->_t = obj._t;
+		this->_k = obj._k;
+		this->_l = obj._l;
 	}
 	return (*this);
 }
@@ -156,6 +154,32 @@ std::string	Channel::getChannelUsers(void)
 	for (size_t i = 0; i < this->_clients.size(); i++)
 		users += this->_clients[i].getUser() + " ";
 	return (users);
+}
+
+std::string	Channel::getModes(void)
+{
+	std::string	modes = "+";
+	if (this->_i)
+		modes += "i";
+	if (this->_t)
+		modes += "t";
+	if (this->_k)
+		modes += "k";
+	if (this->_l)
+		modes += "l";
+	if (this->_k || this->_l)
+	{
+		modes += " ";
+		if (this->_k)
+			if (!this->_key.empty())
+				modes += this->_key + " ";
+		if (this->_l)
+		{
+			std::ostringstream oss;
+			oss << this->_userLimit;
+			modes += oss.str();
+		}
+	}
 }
 
 bool Channel::operator==(const std::string& str)

@@ -27,8 +27,8 @@ class	Channel
 
 		bool				_i;
 		bool				_t;
-		// bool				_k;
-		// bool				_o;
+		bool				_k;
+		bool				_l;
 
 	public:
 		Channel(void);
@@ -58,6 +58,7 @@ class	Channel
 		void				addClient(Client &client);
 		void				removeClient(Client &client);
 		std::string			getChannelUsers(void);
+		std::string			getModes(void);
 
 		bool operator==(const std::string& str);
 };
