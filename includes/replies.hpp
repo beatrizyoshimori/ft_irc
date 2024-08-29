@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 21:16:24 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/08/10 20:00:08 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/08/28 21:44:10 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define ERR_NEEDMOREPARAMS(command, reason)			(FTIRC + " 461 * " + command + " :" + reason + CRLF)
 # define ERR_ALREADYREGISTRED(user)						(FTIRC + " 462 * " + user + ":User already registered" + CRLF)
 # define ERR_PASSWDMISMATCH()							(FTIRC + " 464 * :Password incorrect" + CRLF)
+# define ERR_SETKEY(channel)							(FTIRC + " 467 * :Channel key already set" + CRLF)
 # define ERR_CHANNELISFULL(channel)						(FTIRC + " 471 * " + channel + ":Cannot join channel (Channel is full)" + CRLF)
 # define ERR_INVITEONLYCHAN(channel)					(FTIRC + " 473 * " + channel + ":Cannot join channel (Invite only channel)" + CRLF)
 # define ERR_BADCHANNELKEY(channel)						(FTIRC + " 475 * " + channel + ":Cannot join channel (Incorrect password)" + CRLF)
