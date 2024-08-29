@@ -32,13 +32,27 @@ void	mode(CommandArgs cArgs)
 		return ;
 	}
 
-	std::map<
-	std::vector<std::string>	modes;
-	std::vector<std::string>	modesParams;
-	for (size_t i = 1; i < cArgs.msg.params.size(); i++)
+	std::string					modes = cArgs.msg.params[1];
+	std::vector<std::string>	modesParams(cArgs.msg.params.begin() + 2, cArgs.msg.params.end());
+	bool						action = true;
+	for (size_t i = 0; modes.size(); i++)
 	{
-		if (cArgs.msg.params[i][0] == '+' || cArgs.msg.params[i][0] == '-')
-			modes.push_back(cArgs.msg.params[i]);
-		else
+		if (modes[i] == '+')
+			action = true;
+		else if (modes[i] == '-')
+			action = false;
+		else if (modes[i] == 'i')
+			itChannel->setInviteOnly(action);
+		else if (modes[i] == 't')
+			itChannel->setTopicOPOnly(action);
+		else if (modes[i] == 'k')
+		{
+			if (action && !modesParams.empty())
+				itChannel->setKey(modesParams[0]);
+			else if (modesParams.empty())
+				cArgs.client.sendReplyToClient(ERR_SETKEY(channelName), cArgs.client); //retirar o k da resposta?
+			else
+				itChannel->removeKey();
+		}
 	}
 }
