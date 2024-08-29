@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 19:58:42 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/08/10 19:49:36 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/08/28 21:53:38 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,12 @@ void	Channel::removeClient(Client &client)
 		this->_clients.erase(itClient);
 	if (itOperator != this->_operators.end())
 		this->_operators.erase(itOperator);
+}
+
+void	Channel::removeKey(void)
+{
+	this->_k = false;
+	this->_key = "";
 }
 
 std::string	Channel::getChannelUsers(void)

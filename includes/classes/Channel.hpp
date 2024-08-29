@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 19:58:45 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/08/10 19:48:30 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/08/28 21:53:18 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ class	Channel
 		bool				isOperator(const Client &client);
 		void				addClient(Client &client);
 		void				removeClient(Client &client);
+		void				removeKey(void);
 		std::string			getChannelUsers(void);
 		std::string			getModes(void);
 
