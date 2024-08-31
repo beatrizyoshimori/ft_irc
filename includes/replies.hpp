@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 21:16:24 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/08/28 21:44:10 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/08/31 17:45:57 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 # define ERR_PASSWDMISMATCH()							(FTIRC + " 464 * :Password incorrect" + CRLF)
 # define ERR_SETKEY(channel)							(FTIRC + " 467 * :Channel key already set" + CRLF)
 # define ERR_CHANNELISFULL(channel)						(FTIRC + " 471 * " + channel + ":Cannot join channel (Channel is full)" + CRLF)
+# define ERR_UNKNOWNMODE(mode, channel)					(FTIRC + " 472 * " + mode + " :is unknown mode char to me for " + channel + CRLF)
 # define ERR_INVITEONLYCHAN(channel)					(FTIRC + " 473 * " + channel + ":Cannot join channel (Invite only channel)" + CRLF)
 # define ERR_BADCHANNELKEY(channel)						(FTIRC + " 475 * " + channel + ":Cannot join channel (Incorrect password)" + CRLF)
 # define ERR_CHANOPRIVSNEEDED(channel)					(FTIRC + " 482 * " + channel + ":You're not channel operator" + CRLF)
