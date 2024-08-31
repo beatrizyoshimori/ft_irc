@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 19:54:17 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/08/21 19:54:19 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/08/31 20:17:22 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	invite(CommandArgs cArgs)
 		return ;
 	}
 
-	Client	&recipient = cArgs.server.getClients()[foundPosition];
+	Client	recipient = cArgs.server.getClients()[foundPosition]; //precisa de referência em recipient?
 	std::vector<Channel>::iterator	itChannel = find(cArgs.server.getChannels().begin(), cArgs.server.getChannels().end(), channelName);
 	if (itChannel == cArgs.server.getChannels().end())
 	{
