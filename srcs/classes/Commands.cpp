@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 21:16:13 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/08/10 20:21:29 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/08/31 19:37:52 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	Commands::populateMap(void)
 	_commands["KICK"] = kick;
 	_commands["PART"] = part;
 	// _commands["WHO"] = who;
-	// _commands["MODE"] = mode;
+	_commands["MODE"] = mode;
 	_commands["TOPIC"] = topic;
 	_commands["INVITE"] = invite;
 }

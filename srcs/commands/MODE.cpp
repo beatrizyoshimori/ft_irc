@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   MODE.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/31 20:15:47 by byoshimo          #+#    #+#             */
+/*   Updated: 2024/08/31 20:15:51 by byoshimo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_irc.hpp"
 #include <utility>
 
@@ -48,11 +60,39 @@ void	mode(CommandArgs cArgs)
 		else if (modes[i] == 'k')
 		{
 			if (action && !modesParams.empty())
+			{
 				itChannel->setKey(modesParams[0]);
+				modesParams.erase(modesParams.begin());
+			}
 			else if (modesParams.empty())
 				cArgs.client.sendReplyToClient(ERR_SETKEY(channelName), cArgs.client); //retirar o k da resposta?
 			else
 				itChannel->removeKey();
 		}
+		else if (modes[i] == 'o')
+		{
+			std::vector<Client>::iterator	itClient = find(itChannel->getClients().begin(), itChannel->getClients().end(), *modesParams.begin());
+			if (itClient == itChannel->getClients().end())
+				cArgs.client.sendReplyToClient(ERR_USERNOTINCHANNEL(*modesParams.begin(), channelName), cArgs.client);
+			if (action == true && !itChannel->isOperator(*itClient))
+				itChannel->addOperator(*itClient);
+			else if (action == false)
+				itChannel->removeOperator(*itClient);
+			modesParams.erase(modesParams.begin());
+		}
+		else if (modes[i] == 'l')
+		{
+			if (action == true && (modesParams.empty() || (*modesParams.begin()).find_first_not_of("0123456789") != std::string::npos))
+				cArgs.client.sendReplyToClient(ERR_NEEDMOREPARAMS(cArgs.msg.command, "Wrong argument"), cArgs.client);
+			if (action == true)
+			{
+				itChannel->setUserLimit(std::atoi(modesParams[0].c_str()));
+				modesParams.erase(modesParams.begin());
+			}
+			else
+				itChannel->removeUserLimit();
+		}
+		else
+			cArgs.client.sendReplyToClient(ERR_UNKNOWNMODE(modes[i], channelName), cArgs.client);
 	}
 }
