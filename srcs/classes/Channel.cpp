@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 19:58:42 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/08/28 21:53:38 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/08/31 17:56:02 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,11 @@ void	Channel::addOperator(Client	&client)
 	this->_operators.push_back(client);
 }
 
+void	Channel::removeOperator(Client &client)
+{
+	this->_operators.erase(find(this->_operators.begin(), this->_operators.end(), client));
+}
+
 size_t	Channel::getUserLimit(void) const
 {
 	return (this->_userLimit);
@@ -91,6 +96,7 @@ size_t	Channel::getUserLimit(void) const
 
 void	Channel::setUserLimit(size_t limit)
 {
+	this->_l = true;
 	this->_userLimit = limit;
 }
 
@@ -154,6 +160,12 @@ void	Channel::removeKey(void)
 	this->_key = "";
 }
 
+void	Channel::removeUserLimit(void)
+{
+	this->_l = false;
+	this->_userLimit = -1;
+}
+
 std::string	Channel::getChannelUsers(void)
 {
 	std::string	users;
@@ -186,6 +198,7 @@ std::string	Channel::getModes(void)
 			modes += oss.str();
 		}
 	}
+	return (modes);
 }
 
 bool Channel::operator==(const std::string& str)
