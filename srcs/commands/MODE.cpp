@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 20:15:47 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/08/31 20:15:51 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/08/31 23:11:09 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	mode(CommandArgs cArgs)
 	std::string					modes = cArgs.msg.params[1];
 	std::vector<std::string>	modesParams(cArgs.msg.params.begin() + 2, cArgs.msg.params.end());
 	bool						action = true;
+	std::string					reply = modes;
+	std::string					replyParams;
 	for (size_t i = 0; modes.size(); i++)
 	{
 		if (modes[i] == '+')
@@ -62,10 +64,14 @@ void	mode(CommandArgs cArgs)
 			if (action && !modesParams.empty())
 			{
 				itChannel->setKey(modesParams[0]);
+				replyParams += modesParams[0];
 				modesParams.erase(modesParams.begin());
 			}
-			else if (modesParams.empty())
-				cArgs.client.sendReplyToClient(ERR_SETKEY(channelName), cArgs.client); //retirar o k da resposta?
+			else if (action && modesParams.empty())
+			{
+				cArgs.client.sendReplyToClient(ERR_SETKEY(channelName), cArgs.client);
+				reply.erase(reply.find_first_of('k', i - (modes.size() - reply.size())));
+			}
 			else
 				itChannel->removeKey();
 		}
@@ -73,26 +79,39 @@ void	mode(CommandArgs cArgs)
 		{
 			std::vector<Client>::iterator	itClient = find(itChannel->getClients().begin(), itChannel->getClients().end(), *modesParams.begin());
 			if (itClient == itChannel->getClients().end())
+			{
 				cArgs.client.sendReplyToClient(ERR_USERNOTINCHANNEL(*modesParams.begin(), channelName), cArgs.client);
+				reply.erase(reply.find_first_of('o', i - (modes.size() - reply.size())));
+				continue ;
+			}
 			if (action == true && !itChannel->isOperator(*itClient))
 				itChannel->addOperator(*itClient);
 			else if (action == false)
 				itChannel->removeOperator(*itClient);
+			replyParams += modesParams[0];
 			modesParams.erase(modesParams.begin());
 		}
 		else if (modes[i] == 'l')
 		{
 			if (action == true && (modesParams.empty() || (*modesParams.begin()).find_first_not_of("0123456789") != std::string::npos))
+			{
 				cArgs.client.sendReplyToClient(ERR_NEEDMOREPARAMS(cArgs.msg.command, "Wrong argument"), cArgs.client);
-			if (action == true)
+				reply.erase(reply.find_first_of('l', i - (modes.size() - reply.size())));
+			}
+			else if (action == true)
 			{
 				itChannel->setUserLimit(std::atoi(modesParams[0].c_str()));
+				replyParams += modesParams[0];
 				modesParams.erase(modesParams.begin());
 			}
 			else
 				itChannel->removeUserLimit();
 		}
 		else
+		{
 			cArgs.client.sendReplyToClient(ERR_UNKNOWNMODE(modes[i], channelName), cArgs.client);
+			reply.erase(reply.find_first_of(modes[i], i - (modes.size() - reply.size())));
+		}
 	}
+	//send reply to client
 }
