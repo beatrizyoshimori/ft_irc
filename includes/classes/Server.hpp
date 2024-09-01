@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 19:10:30 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/07/27 18:18:47 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/01 16:30:38 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,19 @@
 class	Server
 {
 	private:
-		int						_serverPort;
-		std::string				_serverPassword;
-		int						_socketFileDescriptor;
-		sockaddr_in				_serverAddress;
-		std::vector<pollfd>		_connectionsPollfds;
-		std::vector<Client>		_clients;
-		std::vector<Channel>	_channels;
+		static int						_serverPort;
+		static std::string				_serverPassword;
+		static int				_socketFileDescriptor;
+		static sockaddr_in				_serverAddress;
+		static std::vector<pollfd>		_connectionsPollfds;
+		static std::vector<Client>		_clients;
+		static std::vector<Channel>	_channels;
 
 		void		createSocket(void);
 		void		defineServerAddress(void);
 		void		bindSocket(void);
 		void		listenForConnections(void);
+		static void	sigHandler(int);
 		void		pollActiveConnections(void);
 		void		acceptNewClients(void);
 		void		processClientsActivity(void);

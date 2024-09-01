@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 19:10:36 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/06/29 19:10:39 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/01 15:46:30 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 #include <iostream>
 #include <sstream>
 #include <unistd.h>
+#include <csignal>
 #include <algorithm>
 #include <vector>
 #include <queue>

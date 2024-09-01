@@ -6,11 +6,19 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 19:10:08 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/07/27 18:19:47 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/01 16:32:37 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Server.hpp"
+
+int						Server::_serverPort;
+std::string				Server::_serverPassword;
+int						Server::_socketFileDescriptor;
+sockaddr_in				Server::_serverAddress;
+std::vector<pollfd>		Server::_connectionsPollfds;
+std::vector<Client>		Server::_clients;
+std::vector<Channel>	Server::_channels;
 
 std::string	Server::getServerPassword(void) const
 {
@@ -92,6 +100,12 @@ void	Server::configureTCP(void)
 	listenForConnections();
 }
 
+void Server::sigHandler(int)
+{
+	close(Server::_socketFileDescriptor);
+	throw std::runtime_error("\nServer stopped by SIGINT");
+}
+
 void	Server::pollActiveConnections(void)
 {
 	if (poll(_connectionsPollfds.data(), _connectionsPollfds.size(), TIMEOUT_MS) < 0)
@@ -100,7 +114,7 @@ void	Server::pollActiveConnections(void)
 
 void	Server::acceptNewClients(void)
 {
-	if ((Server::_connectionsPollfds[0].revents & POLLIN) == POLLIN)
+	if ((this->_connectionsPollfds[0].revents & POLLIN) == POLLIN)
 	{
 		sockaddr_in	newClientAddress;
 		socklen_t	addressLength = sizeof(newClientAddress);
@@ -142,8 +156,6 @@ void	Server::disconnectClient(Client &client)
 
 void	Server::processClientsActivity(void)
 {
-	// if (_clients.empty())
-	// 	return ;
 	for (size_t i = 0; i < _clients.size(); i++)
 	{
 		Client &client = _clients[i];
@@ -161,7 +173,7 @@ void	Server::processClientsActivity(void)
 				Message	msg;
 				msg.parseMessage(line);
 
-				CommandArgs			cArgs(client, msg, *this);
+				CommandArgs	cArgs(client, msg, *this);
 				msg.handleMessage(cArgs);
 			}
 			if (client.getRemoveClient())
@@ -172,7 +184,7 @@ void	Server::processClientsActivity(void)
 
 void	Server::start(void)
 {
-	//Handle signal
+	signal(SIGINT, &Server::sigHandler);
 
 	_connectionsPollfds.push_back((pollfd) {.fd = this->_socketFileDescriptor, .events = POLLIN});
 	while (true)
