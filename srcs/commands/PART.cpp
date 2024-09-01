@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 19:20:42 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/07/27 21:41:39 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/01 17:08:56 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	part(CommandArgs cArgs)
 	for (size_t i = 0; i < channels.size(); i++)
 	{
 		std::string	channelName = channels[i];
-		// std::cout << "channel on server: ." << cArgs.server.getChannels().front().getName() << "." << std::endl;
-		// std::cout << "channelName: ." << channelName << "." << std::endl;
 		std::vector<Channel>::iterator	it = find(cArgs.server.getChannels().begin(), cArgs.server.getChannels().end(), channelName);
 		if (it == cArgs.server.getChannels().end())
 		{

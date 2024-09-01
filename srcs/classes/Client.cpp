@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 19:09:58 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/07/27 21:13:05 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/01 17:06:29 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,14 +109,11 @@ void	Client::receiveData(void)
 
 void	Client::pushToCommandQueue(void)
 {
-	// this->_data.pop_back();
 	if (this->_data.empty())
 		return ;
 	std::vector<std::string>	commands = Utils::split(this->_data, "\r\n");
-	// std::cout << "data.size: " << this->_data.size() << std::endl << "data[-2]: " << this->_data[this->_data.size() - 2] << std::endl << "data[-1]: " << this->_data[this->_data.size() - 1] << std::endl;
 	if (this->_data.size() < 2 || this->_data[this->_data.size() - 2] != '\r' || this->_data[this->_data.size() - 1] != '\n')
 	{
-		// std::cout << "commands.back: ." << commands.back() << "." << std::endl << "commands.back size: " << commands.back().size() << std::endl;
 		this->_data = commands.back();
 		commands.pop_back();
 	}
