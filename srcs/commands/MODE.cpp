@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 20:15:47 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/08/31 23:11:09 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/01 15:17:30 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	mode(CommandArgs cArgs)
 	}
 	if (cArgs.msg.params.size() == 1)
 	{
-		cArgs.client.sendReplyToClient(RPL_CHANNELMODEIS(cArgs.client.getNick(), channelName, itChannel->getModes()), cArgs.client);
+		cArgs.client.sendReplyToClient(RPL_CHANNELMODEIS(cArgs.client.getNick(), channelName, itChannel->getModes(), ""), cArgs.client);
 		return ;
 	}
 	if (!itChannel->isOperator(cArgs.client))
@@ -113,5 +113,5 @@ void	mode(CommandArgs cArgs)
 			reply.erase(reply.find_first_of(modes[i], i - (modes.size() - reply.size())));
 		}
 	}
-	//send reply to client
+	cArgs.client.sendReplyToClient(RPL_CHANNELMODEIS(cArgs.client.getNick(), channelName, reply, replyParams), cArgs.client);
 }
