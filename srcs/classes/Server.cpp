@@ -54,7 +54,11 @@ void	Server::setPort(char *input)
 
 void	Server::setPassword(char *input)
 {
-	// check valid characters
+	if (!input[0])
+		throw std::runtime_error("Invalid password.");
+	for (int i = 0; input[i]; i++)
+		if (!isprint(input[i]))
+			throw std::runtime_error("Invalid password.");
 
 	this->_serverPassword = input;
 }
