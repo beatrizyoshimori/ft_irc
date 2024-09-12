@@ -35,6 +35,7 @@
 # define ERR_USERNOTINCHANNEL(nick, channel)			(FTIRC + " 441 * " + nick + " " + channel + ": They aren't on that channel" + CRLF)
 # define ERR_NOTONCHANNEL(channel)						(FTIRC + " 442 * " + channel + " :Client not on channel" + CRLF)
 # define ERR_USERONCHANNEL(user, channel)				(FTIRC + " 443 * " + user + " " + channel + " :is already on channel" + CRLF)
+# define ERR_NOTREGISTERED(nick)						(FTIRC + " 451 * " + nick + " :You have not registered" + CRLF)
 # define ERR_NEEDMOREPARAMS(command, reason)			(FTIRC + " 461 * " + command + " :" + reason + CRLF)
 # define ERR_ALREADYREGISTRED(user)						(FTIRC + " 462 * " + user + ":User already registered" + CRLF)
 # define ERR_PASSWDMISMATCH()							(FTIRC + " 464 * :Password incorrect" + CRLF)
