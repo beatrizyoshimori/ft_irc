@@ -24,6 +24,7 @@
 #include <iostream>
 #include <sstream>
 #include <unistd.h>
+#include <cctype>
 #include <csignal>
 #include <algorithm>
 #include <vector>
