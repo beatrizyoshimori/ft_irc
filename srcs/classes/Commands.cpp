@@ -34,10 +34,14 @@ void	Commands::populateMap(void)
 
 void	Commands::callFunction(CommandArgs &cArgs)
 {
-	//Check user authentication
 	if (_commands.find(cArgs.msg.command) == _commands.end())
 	{
-		std::cerr << "Invalid command\r\n" << std::endl;
+		std::cerr << "Invalid command\r\n" << std::endl; //colocar sendReplyToClient
+		return ;
+	}
+	if (!cArgs.client.isAuthenticated() && (cArgs.msg.command != "USER" && cArgs.msg.command != "NICK" && cArgs.msg.command != "PASS"))
+	{
+		cArgs.client.sendReplyToClient(ERR_NOTREGISTERED(cArgs.client.getNick()), cArgs.client);
 		return ;
 	}
 	_commands[cArgs.msg.command](cArgs);
