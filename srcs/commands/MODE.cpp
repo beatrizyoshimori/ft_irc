@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 20:15:47 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/09/15 11:47:10 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 13:32:53 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	mode(CommandArgs cArgs)
 	bool						action = true;
 	std::string					reply = modes;
 	std::string					replyParams;
-	for (size_t i = 0; modes.size(); i++)
+	for (size_t i = 0; i < modes.size(); i++)
 	{
 		if (modes[i] == '+')
 			action = true;

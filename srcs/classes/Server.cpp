@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 19:10:08 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/09/15 11:21:42 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 13:27:15 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ Server&	Server::operator=(const Server& obj)
 
 std::string	Server::getServerPassword(void) const
 {
-	return (this->_serverPassword);
+	return (Server::_serverPassword);
 }
 
 std::vector<Client>	Server::getClients(void) const
@@ -54,9 +54,7 @@ std::vector<Channel>	Server::getChannels(void) const
 
 void	Server::addChannel(Channel channel)
 {
-	std::cout << "CHANNEL: " << channel.getName() << std::endl;
-	Channel newChannel(channel);
-	this->_channels.push_back(newChannel);
+	this->_channels.push_back(channel);
 }
 
 void	Server::setPort(char *input)
@@ -150,6 +148,7 @@ void	Server::acceptNewClients(void)
 		_connectionsPollfds.push_back((pollfd) {.fd = newClientSocketDescriptor, .events = POLLIN});
 		
 		Client	newClient(newClientSocketDescriptor);
+		newClient.setServerPass(this->getServerPassword());
 		_clients.push_back(newClient);
 	}
 }
@@ -195,7 +194,6 @@ void	Server::processClientsActivity(void)
 
 				Message	msg;
 				msg.parseMessage(line);
-				// Server	serv = *this;
 				// CommandArgs	cArgs(client, msg, *this);
 				msg.handleMessage(client, msg, _clients, _channels);
 			}

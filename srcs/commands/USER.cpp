@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 21:15:57 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/09/15 11:25:56 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 12:41:54 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ void	user(CommandArgs cArgs)
 		cArgs.msg.params[3] = cArgs.msg.params[3].substr(1);
 	cArgs.client.setUser(cArgs.msg.params[0]);
 	cArgs.client.setRealname(cArgs.msg.params[3]);
-	// if (cArgs.client.getRetries())
-	// 	return(""); precisa?
 	if (cArgs.client.isAuthenticated())
 		cArgs.client.sendReplyToClient(RPL_WELCOME(cArgs.client.getNick(), cArgs.client.getUser()), cArgs.client);
 }

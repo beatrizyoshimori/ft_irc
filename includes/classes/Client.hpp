@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 19:10:12 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/09/14 22:01:23 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 13:17:28 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ class	Client
 		std::string	_user;
 		std::string	_realname;
 		std::string	_pass;
+		std::string	_serverPass;
 
 		std::queue<std::string>	_commandsQueue;
 
@@ -47,6 +48,8 @@ class	Client
 		void					setRealname(std::string realname);
 		std::string				getPass(void) const;
 		void					setPass(std::string pass);
+		std::string				getServerPass(void) const;
+		void					setServerPass(std::string pass);
 
 		bool					isAuthenticated() const;
 

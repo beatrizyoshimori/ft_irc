@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 18:14:52 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/09/15 11:35:59 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 16:18:28 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	join(CommandArgs cArgs)
 				cArgs.msg.params[0].append(",");
 			}
 		}
-		// part(cArgs);
+		part(cArgs);
 		return ;
 	}
 	std::string					channelUsers;
@@ -53,26 +53,20 @@ void	join(CommandArgs cArgs)
 			cArgs.client.sendReplyToClient(ERR_NOSUCHCHANNEL(channelName), cArgs.client);
 			continue ;
 		}
-		std::vector<Channel> channels = cArgs.channels;
-		std::cout << "channel:" << channels.size() << std::endl;
-		std::vector<Channel>::iterator	itChan = channels.begin();
-		while (itChan != channels.end())
-		{
-			std::cout << "channelName: " << itChan->getName();
-			itChan++;
-		}
 		std::vector<Channel>::iterator	it = find(cArgs.channels.begin(), cArgs.channels.end(), channelName);
 		Channel	&channel = *it;
 		if (it != cArgs.channels.end())
 		{
-			std::cout << "Channel it: " << it->getName() << std::endl; 
 			if (channel.isClientOnChannel(cArgs.client))
 				continue ;
-			if (channel.getInviteOnly()) // && !cArgs.client.channelOnInviteList(channelName)
+			if (channel.getInviteOnly())
 			{
-				cArgs.client.sendReplyToClient(ERR_INVITEONLYCHAN(channelName), cArgs.client);
+				std::cout << "dentro\n";
+				if (!channel.isClientInvited(cArgs.client))
+					cArgs.client.sendReplyToClient(ERR_INVITEONLYCHAN(channelName), cArgs.client);
 				continue ;
 			}
+			std::cout << "AQUI" << std::endl;
 			if (channel.getKey() != "" && channel.getKey() != channelKey)
 			{
 				cArgs.client.sendReplyToClient(ERR_BADCHANNELKEY(channelName), cArgs.client);
@@ -86,8 +80,8 @@ void	join(CommandArgs cArgs)
 			channel.addClient(cArgs.client);
 			channelUsers = channel.getChannelUsers();
 			channelTopic = channel.getTopic();
-			// if (cArgs.client.channelOnInviteList(channelName))
-			// 	cArgs.client.removeChannelFromInviteList(channelName);
+			if (channel.getInviteOnly() && channel.isClientInvited(cArgs.client))
+				channel.removeClientFromInvited(cArgs.client);
 			cArgs.client.sendReplyToBroadcastList(JOIN(cArgs.client.getNick(), cArgs.client.getUser(), channelName), channel.getClients());
 		}
 		else
@@ -98,12 +92,7 @@ void	join(CommandArgs cArgs)
 			if (!channelKey.empty())
 				newChannel.setKey(channelKey);
 			channelUsers = newChannel.getChannelUsers();
-			cArgs.channels.push_back(newChannel);
-			std::vector<Channel> channels = cArgs.channels;
-			std::vector<Channel>::iterator	it = channels.begin();
-			for ( ; it != channels.end(); it++)
-				std::cout << it->getName() << std::endl;
-			
+			cArgs.channels.push_back(newChannel);			
 			cArgs.client.sendReplyToBroadcastList(JOIN(cArgs.client.getNick(), cArgs.client.getUser(), channelName), newChannel.getClients());
 		}
 		if (!channelTopic.empty())

@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 21:16:08 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/09/15 11:23:39 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 12:31:27 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,6 @@ void	Message::parseMessage(std::string line)
 	this->params.erase(this->params.begin());
 	if (!params.empty() && params.back().find(':') != std::string::npos)
 		params.back().erase(0, 1);
-
-	// // Parse checking
-	// std::cout << "prefix:" << this->prefix << std::endl;
-	// std::cout << "command:" << this->command << std::endl << "params:";
-	// for (std::vector<std::string>::iterator i = this->params.begin(); i != params.end(); i++)
-	// 	std::cout << *i << ' ';
-	// std::cout << std::endl;
 }
 
 void	Message::handleMessage(Client &client, Message &msg, std::vector<Client> &clients, std::vector<Channel> &channels)

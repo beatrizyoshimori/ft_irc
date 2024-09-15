@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 19:10:30 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/09/15 11:19:38 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 13:10:45 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ class	Server
 	private:
 		static int						_serverPort;
 		static std::string				_serverPassword;
-		static int				_socketFileDescriptor;
+		static int						_socketFileDescriptor;
 		static sockaddr_in				_serverAddress;
 		static std::vector<pollfd>		_connectionsPollfds;
 		static std::vector<Client>		_clients;
-		static std::vector<Channel>	_channels;
+		static std::vector<Channel>		_channels;
 
 		void		createSocket(void);
 		void		defineServerAddress(void);

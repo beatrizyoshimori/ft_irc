@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 19:58:45 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/09/15 11:03:44 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 16:09:52 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ class	Channel
 		std::vector<Client>	_clients;
 		std::vector<Client>	_operators;
 		size_t				_userLimit;
+		std::vector<Client>	_invitedClients;
 
 		bool				_i;
 		bool				_t;
@@ -63,6 +64,9 @@ class	Channel
 		void				removeUserLimit(void);
 		std::string			getChannelUsers(void);
 		std::string			getModes(void);
+		void				addClientToInvited(Client &client);
+		bool				isClientInvited(Client &client);
+		void				removeClientFromInvited(Client &client);
 
 		bool operator==(const std::string& str);
 };

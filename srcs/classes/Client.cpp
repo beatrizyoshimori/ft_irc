@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 19:09:58 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/09/14 22:04:12 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 13:32:34 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ Client &Client::operator=(const Client &obj) {
 		this->_user = obj._user;
 		this->_realname = obj._realname;
 		this->_pass = obj._pass;
+		this->_serverPass = obj._serverPass;
 	}
 	return (*this);
 }
@@ -96,6 +97,16 @@ void	Client::setPass(std::string pass)
 	this->_pass = pass;
 }
 
+std::string	Client::getServerPass(void) const
+{
+	return (this->_serverPass);
+}
+
+void	Client::setServerPass(std::string pass)
+{
+	this->_serverPass = pass;
+}
+
 bool	Client::isAuthenticated() const
 {
 	if (this->_user.empty() || this->_nick.empty() || this->_pass.empty())
@@ -105,7 +116,6 @@ bool	Client::isAuthenticated() const
 
 bool Client::operator==(const Client& obj)
 {
-	std::cout << "OPERATOR" << std::endl;
 	return (this->_user == obj._user);
 }
 
@@ -120,7 +130,6 @@ void	Client::receiveData(void)
 	std::memset(buff, 0, BUFFER_SIZE);
 
 	long	nbytes = recv(this->getFd(), buff, BUFFER_SIZE, 0);
-	std::cout << buff << std::endl;
 	if (nbytes == 0)
 		this->setRemoveClient(true);
 	else

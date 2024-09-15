@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 19:54:17 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/09/15 11:45:36 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 16:07:23 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	invite(CommandArgs cArgs)
 		return ;
 	}
 	recipient.sendReplyToClient(RPL_INVITEMSG(cArgs.client.getNick(), cArgs.client.getUser(), nickName, channelName), recipient);
-	// if (channel.getIsInviteOnly())
-	// 	recipient.addChannelToInvited(channelName);
+	itChannel->addClientToInvited(recipient);
 	cArgs.client.sendReplyToClient(RPL_INVITING(cArgs.client.getNick(), nickName, channelName), cArgs.client);
 }
