@@ -6,11 +6,24 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 21:16:08 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/07/24 21:16:10 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/14 22:08:41 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Message.hpp"
+
+Message::Message(const Message& obj)
+{
+	*this = obj;
+}
+
+Message& Message::operator=(const Message& obj)
+{
+	this->prefix = obj.prefix;
+	this->command = obj.command;
+	this->params = obj.params;
+	return (*this);
+}
 
 void	Message::parseMessage(std::string line)
 {
@@ -35,8 +48,9 @@ void	Message::parseMessage(std::string line)
 	// std::cout << std::endl;
 }
 
-void	Message::handleMessage(CommandArgs &cArgs)
+void	Message::handleMessage(Client &client, Message &msg, Server &server)
 {
+	CommandArgs	cArgs = CommandArgs(client, msg, server);
 	if (cArgs.msg.params.size() > 15)
 	{
 		cArgs.client.sendReplyToClient(ERR_NEEDMOREPARAMS(cArgs.msg.command, "Too many params"), cArgs.client);

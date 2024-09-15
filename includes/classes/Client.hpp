@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 19:10:12 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/07/27 20:43:29 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/14 22:01:23 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ class	Client
 	public:
 		Client(void) {};
 		Client(int socketDescriptor);
+		Client(const Client &rhs);
+		Client &operator=( const Client &rhs);
 		~Client(void) {};
 
 		int						getFd(void) const;

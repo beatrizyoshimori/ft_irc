@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 19:10:08 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/09/01 16:32:37 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/14 22:10:01 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,23 @@ sockaddr_in				Server::_serverAddress;
 std::vector<pollfd>		Server::_connectionsPollfds;
 std::vector<Client>		Server::_clients;
 std::vector<Channel>	Server::_channels;
+
+Server::Server(const Server& obj)
+{
+	*this = obj;
+}
+
+Server&	Server::operator=(const Server& obj)
+{
+	this->_serverPort = obj._serverPort;
+	this->_serverPassword = obj._serverPassword;
+	this->_socketFileDescriptor = obj._socketFileDescriptor;
+	this->_serverAddress = obj._serverAddress;
+	this->_connectionsPollfds = obj._connectionsPollfds;
+	this->_clients = obj._clients;
+	this->_channels = obj._channels;
+	return (*this);
+}
 
 std::string	Server::getServerPassword(void) const
 {
@@ -176,9 +193,9 @@ void	Server::processClientsActivity(void)
 
 				Message	msg;
 				msg.parseMessage(line);
-
-				CommandArgs	cArgs(client, msg, *this);
-				msg.handleMessage(cArgs);
+				// Server	serv = *this;
+				// CommandArgs	cArgs(client, msg, *this);
+				msg.handleMessage(client, msg, *this);
 			}
 			if (client.getRemoveClient())
 				disconnectClient(client);

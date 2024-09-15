@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 18:14:52 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/08/07 19:40:40 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/14 21:54:47 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,15 @@ void	join(CommandArgs cArgs)
 			cArgs.client.sendReplyToClient(ERR_NOSUCHCHANNEL(channelName), cArgs.client);
 			continue ;
 		}
+		std::vector<Channel> channels = cArgs.server.getChannels();
+		std::cout << "channel:" << channels.size() << std::endl;
 		std::vector<Channel>::iterator	it = find(cArgs.server.getChannels().begin(), cArgs.server.getChannels().end(), channelName);
 		Channel	&channel = *it;
 		if (it != cArgs.server.getChannels().end())
 		{
 			if (channel.isClientOnChannel(cArgs.client))
 				continue ;
+			std::cout << "Channel it: " << std::endl; 
 			if (channel.getInviteOnly()) // && !cArgs.client.channelOnInviteList(channelName)
 			{
 				cArgs.client.sendReplyToClient(ERR_INVITEONLYCHAN(channelName), cArgs.client);
@@ -90,6 +93,11 @@ void	join(CommandArgs cArgs)
 				newChannel.setKey(channelKey);
 			channelUsers = newChannel.getChannelUsers();
 			cArgs.server.addChannel(newChannel);
+			std::vector<Channel> channels = cArgs.server.getChannels();
+			std::vector<Channel>::iterator	it = channels.begin();
+			for ( ; it != channels.end(); it++)
+				std::cout << it->getName() << std::endl;
+			
 			cArgs.client.sendReplyToBroadcastList(JOIN(cArgs.client.getNick(), cArgs.client.getUser(), channelName), newChannel.getClients());
 		}
 		if (!channelTopic.empty())

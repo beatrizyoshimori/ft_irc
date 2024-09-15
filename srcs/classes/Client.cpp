@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 19:09:58 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/09/01 17:06:29 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/14 22:04:12 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,24 @@ Client::Client(int socketDescriptor)
 {
 	this->_fd = socketDescriptor;
 	this->_removeClient = false;
+}
+
+Client::Client(const Client &rhs) {
+	*this = rhs;
+}
+
+Client &Client::operator=(const Client &obj) {
+	if (&obj != this)
+	{
+		this->_fd = obj._fd;
+		this->_removeClient = obj._removeClient;
+		this->_data = obj._data;
+		this->_nick = obj._nick;
+		this->_user = obj._user;
+		this->_realname = obj._realname;
+		this->_pass = obj._pass;
+	}
+	return (*this);
 }
 
 int Client::getFd(void) const
@@ -87,12 +105,13 @@ bool	Client::isAuthenticated() const
 
 bool Client::operator==(const Client& obj)
 {
+	std::cout << "OPERATOR" << std::endl;
 	return (this->_user == obj._user);
 }
 
 bool Client::operator==(const std::string& str)
 {
-	return (this->_user == str);
+	return (this->_user == str || this->_nick == str);
 }
 
 void	Client::receiveData(void)
@@ -101,6 +120,7 @@ void	Client::receiveData(void)
 	std::memset(buff, 0, BUFFER_SIZE);
 
 	long	nbytes = recv(this->getFd(), buff, BUFFER_SIZE, 0);
+	std::cout << buff << std::endl;
 	if (nbytes == 0)
 		this->setRemoveClient(true);
 	else

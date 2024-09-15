@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 19:10:30 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/09/01 16:30:38 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/14 21:32:32 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ class	Server
 	public:
 		Server(void) {};
 		~Server(void) {};
+		Server(const Server& obj);
+		Server&	operator=(const Server& obj);
 
 		void	setPort(char *input);
 		void	setPassword(char *input);

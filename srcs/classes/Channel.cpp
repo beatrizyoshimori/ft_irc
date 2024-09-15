@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 19:58:42 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/08/31 17:56:02 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/14 21:56:34 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ bool	Channel::isClientOnChannel(const Client &client)
 {
 	std::vector<Client>::iterator	it;
 	it = find(this->_clients.begin(), this->_clients.end(), client);
+	std::cout << "AQUI " << std::endl;
 	if (it == this->_clients.end())
 		return (false);
 	return (true);
