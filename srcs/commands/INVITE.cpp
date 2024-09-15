@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 19:54:17 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/08/31 20:17:22 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 11:45:36 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	invite(CommandArgs cArgs)
 	std::string	channelName = cArgs.msg.params[1];
 	int			foundPosition = -1;
 
-	for (size_t i = 0; i < cArgs.server.getClients().size(); i++)
+	for (size_t i = 0; i < cArgs.clients.size(); i++)
 	{
-		if (cArgs.server.getClients()[i] == nickName)
+		if (cArgs.clients[i] == nickName)
 		{
 			foundPosition = i;
 			break ;
@@ -38,9 +38,9 @@ void	invite(CommandArgs cArgs)
 		return ;
 	}
 
-	Client	recipient = cArgs.server.getClients()[foundPosition]; //precisa de referência em recipient?
-	std::vector<Channel>::iterator	itChannel = find(cArgs.server.getChannels().begin(), cArgs.server.getChannels().end(), channelName);
-	if (itChannel == cArgs.server.getChannels().end())
+	Client	recipient = cArgs.clients[foundPosition]; //precisa de referência em recipient?
+	std::vector<Channel>::iterator	itChannel = find(cArgs.channels.begin(), cArgs.channels.end(), channelName);
+	if (itChannel == cArgs.channels.end())
 	{
 		cArgs.client.sendReplyToClient(ERR_NOSUCHCHANNEL(channelName), cArgs.client);
 		return ;

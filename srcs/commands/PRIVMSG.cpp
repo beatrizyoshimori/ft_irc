@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:44:58 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/08/07 19:45:00 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 11:48:12 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	privmsg(CommandArgs cArgs)
 	if (recipient[0] == '#' || recipient[0] == '&')
 	{
 		std::vector<Channel>::iterator	itChannel;
-		itChannel = find(cArgs.server.getChannels().begin(), cArgs.server.getChannels().end(), recipient);
-		if (itChannel != cArgs.server.getChannels().end())
+		itChannel = find(cArgs.channels.begin(), cArgs.channels.end(), recipient);
+		if (itChannel != cArgs.channels.end())
 		{
 			if (!itChannel->isClientOnChannel(cArgs.client))
 			{
@@ -50,8 +50,8 @@ void	privmsg(CommandArgs cArgs)
 	else
 	{
 		std::vector<Client>::iterator	itClient;
-		itClient = find(cArgs.server.getClients().begin(), cArgs.server.getClients().end(), recipient);
-		if (cArgs.server.getClients().empty() || itClient == cArgs.server.getClients().end())
+		itClient = find(cArgs.clients.begin(), cArgs.clients.end(), recipient);
+		if (cArgs.clients.empty() || itClient == cArgs.clients.end())
 		{
 			cArgs.client.sendReplyToClient(ERR_NOSUCHNICK(cArgs.client.getNick(), recipient), cArgs.client);
 			return ;

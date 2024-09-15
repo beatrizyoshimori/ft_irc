@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 21:15:57 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/07/24 21:15:59 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 11:25:56 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	user(CommandArgs cArgs)
 		cArgs.client.sendReplyToClient(ERR_NEEDMOREPARAMS(cArgs.msg.command, "Not enough parameters"), cArgs.client);
 		return ;
 	}
-	for (size_t i = 0; i < cArgs.server.getClients().size(); i++)
+	for (size_t i = 0; i < cArgs.clients.size(); i++)
 	{
-		if (cArgs.server.getClients()[i].getUser() == cArgs.msg.params[0])
+		if (cArgs.clients[i].getUser() == cArgs.msg.params[0])
 		{
-			cArgs.server.getClients()[i].setRemoveClient(true);
-			cArgs.client.sendReplyToClient(ERR_ALREADYREGISTRED(cArgs.server.getClients()[i].getUser()), cArgs.client);
+			cArgs.clients[i].setRemoveClient(true);
+			cArgs.client.sendReplyToClient(ERR_ALREADYREGISTRED(cArgs.clients[i].getUser()), cArgs.client);
 		}
 	}
 	if (cArgs.msg.params[3][0] == ':')

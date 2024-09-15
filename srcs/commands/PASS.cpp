@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 18:15:18 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/07/26 18:15:20 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 11:27:44 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void	pass(CommandArgs cArgs)
 		return ;
 	}
 	cArgs.client.setPass(cArgs.msg.params[0]);
-	if (cArgs.client.getPass() != cArgs.server.getServerPassword())
-	{
-		cArgs.client.setRemoveClient(true);
-		cArgs.client.sendReplyToClient(ERR_PASSWDMISMATCH(), cArgs.client);
-		return ;
-	}
+	// if (cArgs.client.getPass() != Server::getServerPassword())
+	// {
+	// 	cArgs.client.setRemoveClient(true);
+	// 	cArgs.client.sendReplyToClient(ERR_PASSWDMISMATCH(), cArgs.client);
+	// 	return ;
+	// }
 	if (cArgs.client.isAuthenticated())
 		cArgs.client.sendReplyToClient(RPL_WELCOME(cArgs.client.getNick(), cArgs.client.getUser()), cArgs.client);
 }

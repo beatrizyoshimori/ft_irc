@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 21:16:39 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/09/14 22:06:35 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 11:32:59 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ class	Message
 		Message& operator=(const Message& obj);
 
 		void	parseMessage(std::string line);
-		void	handleMessage(Client &client, Message &msg, Server &server);
+		void	handleMessage(Client &client, Message &msg, std::vector<Client> &clients, std::vector<Channel> &channels);
 };
 
 #endif

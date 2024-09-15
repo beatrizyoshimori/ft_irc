@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 19:58:42 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/09/14 21:56:34 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 11:16:41 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,23 @@ Channel::Channel(void) : _i(false), _t(false), _k(false), _l(false) {}
 
 Channel::Channel(std::string &name) : _name(name), _i(false), _t(false), _k(false), _l(false) {}
 
+Channel::Channel(const Channel& obj)
+{
+	*this = obj;
+}
+
 Channel&	Channel::operator=(const Channel &obj)
 {
 	if (this != &obj)
 	{
-		this->_name = obj._name;
-		this->_topic = obj._topic;
-		this->_key = obj._key;
-		this->_clients = obj._clients;
-		this->_operators = obj._operators;
-		this->_userLimit = obj._userLimit;
-		this->_i = obj._i;
-		this->_t = obj._t;
+		this->_name = obj.getName();
+		this->_topic = obj.getTopic();
+		this->_key = obj.getKey();
+		this->_clients = obj.getClients();
+		this->_operators = obj.getOperators();
+		this->_userLimit = obj.getUserLimit();
+		this->_i = obj.getInviteOnly();
+		this->_t = obj.getTopicOPOnly();
 		this->_k = obj._k;
 		this->_l = obj._l;
 	}

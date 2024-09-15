@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 20:15:47 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/09/01 15:17:30 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 11:47:10 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	mode(CommandArgs cArgs)
 	}
 
 	std::string	channelName = cArgs.msg.params[0];
-	std::vector<Channel>::iterator	itChannel = find(cArgs.server.getChannels().begin(), cArgs.server.getChannels().end(), channelName);
-	if (itChannel == cArgs.server.getChannels().end())
+	std::vector<Channel>::iterator	itChannel = find(cArgs.channels.begin(), cArgs.channels.end(), channelName);
+	if (itChannel == cArgs.channels.end())
 	{
 		cArgs.client.sendReplyToClient(ERR_NOSUCHCHANNEL(channelName), cArgs.client);
 		return ;

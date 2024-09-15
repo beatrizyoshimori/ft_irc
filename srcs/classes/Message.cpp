@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 21:16:08 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/09/14 22:08:41 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 11:23:39 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	Message::parseMessage(std::string line)
 	// std::cout << std::endl;
 }
 
-void	Message::handleMessage(Client &client, Message &msg, Server &server)
+void	Message::handleMessage(Client &client, Message &msg, std::vector<Client> &clients, std::vector<Channel> &channels)
 {
-	CommandArgs	cArgs = CommandArgs(client, msg, server);
+	CommandArgs	cArgs = CommandArgs(client, msg, clients, channels);
 	if (cArgs.msg.params.size() > 15)
 	{
 		cArgs.client.sendReplyToClient(ERR_NEEDMOREPARAMS(cArgs.msg.command, "Too many params"), cArgs.client);

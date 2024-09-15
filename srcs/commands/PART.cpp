@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 19:20:42 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/09/01 17:08:56 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 11:47:37 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	part(CommandArgs cArgs)
 	for (size_t i = 0; i < channels.size(); i++)
 	{
 		std::string	channelName = channels[i];
-		std::vector<Channel>::iterator	it = find(cArgs.server.getChannels().begin(), cArgs.server.getChannels().end(), channelName);
-		if (it == cArgs.server.getChannels().end())
+		std::vector<Channel>::iterator	it = find(cArgs.channels.begin(), cArgs.channels.end(), channelName);
+		if (it == cArgs.channels.end())
 		{
 			cArgs.client.sendReplyToClient(ERR_NOSUCHCHANNEL(channelName), cArgs.client);
 			continue ;
@@ -42,7 +42,7 @@ void	part(CommandArgs cArgs)
 		}
 		it->removeClient(cArgs.client);
 		if (it->getClients().empty())
-			cArgs.server.getChannels().erase(it);
+			cArgs.channels.erase(it);
 		else
 			cArgs.client.sendReplyToBroadcastList(PART(cArgs.client.getNick(), cArgs.client.getUser(), channelName, message), it->getClients());
 	}

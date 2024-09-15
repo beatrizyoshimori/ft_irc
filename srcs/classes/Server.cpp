@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 19:10:08 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/09/14 22:10:01 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 11:21:42 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,11 @@ std::vector<Channel>	Server::getChannels(void) const
 	return (this->_channels);
 }
 
-void	Server::addChannel(Channel &channel)
+void	Server::addChannel(Channel channel)
 {
-	this->_channels.push_back(channel);
+	std::cout << "CHANNEL: " << channel.getName() << std::endl;
+	Channel newChannel(channel);
+	this->_channels.push_back(newChannel);
 }
 
 void	Server::setPort(char *input)
@@ -195,7 +197,7 @@ void	Server::processClientsActivity(void)
 				msg.parseMessage(line);
 				// Server	serv = *this;
 				// CommandArgs	cArgs(client, msg, *this);
-				msg.handleMessage(client, msg, *this);
+				msg.handleMessage(client, msg, _clients, _channels);
 			}
 			if (client.getRemoveClient())
 				disconnectClient(client);

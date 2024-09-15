@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:44:47 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/08/10 20:18:10 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 11:46:16 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	kick(CommandArgs cArgs)
 	for (size_t i = 0; i < channels.size(); i++)
 	{
 		std::string	channelName = channels[i];
-		std::vector<Channel>::iterator	itChannel = find(cArgs.server.getChannels().begin(), cArgs.server.getChannels().end(), channelName);
-		if (itChannel == cArgs.server.getChannels().end())
+		std::vector<Channel>::iterator	itChannel = find(cArgs.channels.begin(), cArgs.channels.end(), channelName);
+		if (itChannel == cArgs.channels.end())
 		{
 			cArgs.client.sendReplyToClient(ERR_NOSUCHCHANNEL(channelName), cArgs.client);
 			continue ;

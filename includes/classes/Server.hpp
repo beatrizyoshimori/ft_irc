@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 19:10:30 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/09/14 21:32:32 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 11:19:38 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ class	Server
 		std::string				getServerPassword(void) const;
 		std::vector<Client>		getClients(void) const;
 		std::vector<Channel>	getChannels(void) const;
-		void					addChannel(Channel &channel);
+		void					addChannel(Channel channel);
 };
 
 #endif
