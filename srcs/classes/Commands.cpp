@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 21:16:13 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/09/15 11:48:45 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 17:00:39 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	Commands::callFunction(CommandArgs &cArgs)
 {
 	if (_commands.find(cArgs.msg.command) == _commands.end())
 	{
-		std::cerr << "Invalid command\r\n" << std::endl; //colocar sendReplyToClient
+		cArgs.client.sendReplyToClient(INVALIDCMD(cArgs.client.getNick()), cArgs.client);
 		return ;
 	}
 	if (!cArgs.client.isAuthenticated() && (cArgs.msg.command != "USER" && cArgs.msg.command != "NICK" && cArgs.msg.command != "PASS"))

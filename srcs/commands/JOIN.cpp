@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 18:14:52 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/09/15 16:18:28 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 16:53:06 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,11 @@ void	join(CommandArgs cArgs)
 		{
 			if (channel.isClientOnChannel(cArgs.client))
 				continue ;
-			if (channel.getInviteOnly())
+			if (channel.getInviteOnly() && !channel.isClientInvited(cArgs.client))
 			{
-				std::cout << "dentro\n";
-				if (!channel.isClientInvited(cArgs.client))
-					cArgs.client.sendReplyToClient(ERR_INVITEONLYCHAN(channelName), cArgs.client);
+				cArgs.client.sendReplyToClient(ERR_INVITEONLYCHAN(channelName), cArgs.client);
 				continue ;
 			}
-			std::cout << "AQUI" << std::endl;
 			if (channel.getKey() != "" && channel.getKey() != channelKey)
 			{
 				cArgs.client.sendReplyToClient(ERR_BADCHANNELKEY(channelName), cArgs.client);

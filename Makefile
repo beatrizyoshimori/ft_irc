@@ -29,6 +29,16 @@ SOURCES			=		main.cpp \
 						TOPIC.cpp \
 						MODE.cpp
 
+HEADERS			=		includes/classes/Channel.hpp \
+						includes/classes/Client.hpp \
+						includes/classes/CommandArgs.hpp \
+						includes/classes/Commands.hpp \
+						includes/classes/Message.hpp \
+						includes/classes/Server.hpp \
+						includes/classes/Utils.hpp \
+						includes/ft_irc.hpp \
+						includes/replies.hpp
+
 OBJECTS			=		$(patsubst %.cpp, $(OBJECTS_PATH)%.o, $(SOURCES))
 
 all:					$(NAME)
@@ -37,7 +47,7 @@ $(OBJECTS_PATH)%.o:		%.cpp
 						@mkdir -p $(dir $@)
 						@$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
 
-$(NAME):				$(OBJECTS)
+$(NAME):				$(OBJECTS) $(HEADERS)
 						@$(CC) $(FLAGS) $(INCLUDES) $(OBJECTS) -o $@
 						@echo "\033[32mircserv compiled!\033[0m"
 

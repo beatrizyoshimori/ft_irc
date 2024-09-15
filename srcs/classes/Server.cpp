@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 19:10:08 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/09/15 13:27:15 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 16:58:20 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,6 @@ void	Server::disconnectClient(Client &client)
 	std::vector<Client>::iterator	it;
 	it = find(this->_clients.begin(), this->_clients.end(), client);
 	this->_clients.erase(it);
-	// Client::decrementIdCounter();
 }
 
 void	Server::processClientsActivity(void)
@@ -194,7 +193,6 @@ void	Server::processClientsActivity(void)
 
 				Message	msg;
 				msg.parseMessage(line);
-				// CommandArgs	cArgs(client, msg, *this);
 				msg.handleMessage(client, msg, _clients, _channels);
 			}
 			if (client.getRemoveClient())

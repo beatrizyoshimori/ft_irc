@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 21:16:24 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/09/01 15:17:48 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 17:01:43 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define CRLF std::string("\r\n")
 
 # define RPL_WELCOME(nick, user)						(FTIRC + " 001 " + user + " :Welcome to the Internet Relay Chat " + nick + "!" + user + "@*" + CRLF)
-# define RPL_CHANNELMODEIS(nick, channel, mode, params)	(FTIRC + " 324 " + nick + " " + channel + " " + mode + params + CRLF)
+# define RPL_CHANNELMODEIS(nick, channel, mode, params)	(FTIRC + " 324 " + nick + " " + channel + " " + mode + " " + params + CRLF)
 # define RPL_NOTOPIC(nick, channel)						(FTIRC + " 331 " + nick + " " + channel + " :No topic is set" + CRLF)
 # define RPL_TOPIC(nick, channel, topic)				(FTIRC + " 332 " + nick + " " + channel + " :" + topic + CRLF)
 # define RPL_INVITING(nick, recipient, channel)			(FTIRC + " 341 " + nick + " " + recipient + " :" + channel + CRLF)
@@ -54,5 +54,6 @@
 # define ERR_CANNOTKICKYOURSELF(nick)					(FTIRC + " " + nick + " :Cannot kick yourself" + CRLF)
 # define RPL_INVITEMSG(nick, user, recipient, channel)	(":" + nick + "!" + user + "@* INVITE " + recipient + " :" + channel + CRLF)
 # define TOPICMSG(nick, user, channel, topic)			(":" + nick + "!" + user + "@* TOPIC " + channel + " :" + topic + CRLF)
+# define INVALIDCMD(nick)								(FTIRC + " " + nick + " :Invalid command" + CRLF)
 
 #endif

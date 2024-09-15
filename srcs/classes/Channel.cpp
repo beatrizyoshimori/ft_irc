@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 19:58:42 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/09/15 16:17:13 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 16:52:59 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,9 +214,7 @@ void	Channel::addClientToInvited(Client &client)
 bool	Channel::isClientInvited(Client &client)
 {
 	std::vector<Client>::iterator	it;
-	std::cout << "antes\n";
 	it = find(this->_invitedClients.begin(), this->_invitedClients.end(), client);
-	std::cout << "depois\n";
 	if (it == this->_invitedClients.end())
 		return (false);
 	return (true);
