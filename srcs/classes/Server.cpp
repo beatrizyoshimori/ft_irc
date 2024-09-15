@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 19:10:08 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/09/15 16:58:20 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 18:38:49 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ void	Server::acceptNewClients(void)
 			throw std::runtime_error("Failed to accept new client.");
 		if (fcntl(newClientSocketDescriptor, F_SETFL, O_NONBLOCK) == -1)
 			throw std::runtime_error("Failed to set client socket descriptor to non-blocking mode.");
-		_connectionsPollfds.push_back((pollfd) {.fd = newClientSocketDescriptor, .events = POLLIN});
+		_connectionsPollfds.push_back((pollfd) {.fd = newClientSocketDescriptor, .events = POLLIN, .revents = 0});
 		
 		Client	newClient(newClientSocketDescriptor);
 		newClient.setServerPass(this->getServerPassword());
@@ -205,7 +205,7 @@ void	Server::start(void)
 {
 	signal(SIGINT, &Server::sigHandler);
 
-	_connectionsPollfds.push_back((pollfd) {.fd = this->_socketFileDescriptor, .events = POLLIN});
+	_connectionsPollfds.push_back((pollfd) {.fd = this->_socketFileDescriptor, .events = POLLIN, .revents = 0});
 	while (true)
 	{
 		pollActiveConnections();

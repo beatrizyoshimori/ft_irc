@@ -6,7 +6,7 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 19:58:45 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/09/15 16:09:52 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 18:43:44 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ class	Channel
 		void				setInviteOnly(bool action);
 		bool				getTopicOPOnly(void) const;
 		void				setTopicOPOnly(bool action);
+
 
 		bool				isClientOnChannel(const Client &client);
 		bool				isOperator(const Client &client);

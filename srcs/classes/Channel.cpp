@@ -6,15 +6,15 @@
 /*   By: byoshimo <byoshimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 19:58:42 by byoshimo          #+#    #+#             */
-/*   Updated: 2024/09/15 16:52:59 by byoshimo         ###   ########.fr       */
+/*   Updated: 2024/09/15 18:46:11 by byoshimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Channel.hpp"
 
-Channel::Channel(void) : _i(false), _t(false), _k(false), _l(false) {}
+Channel::Channel(void) : _userLimit(1024),_i(false), _t(false), _k(false), _l(false) {}
 
-Channel::Channel(std::string &name) : _name(name), _i(false), _t(false), _k(false), _l(false) {}
+Channel::Channel(std::string &name) : _name(name), _userLimit(1024), _i(false), _t(false), _k(false), _l(false) {}
 
 Channel::Channel(const Channel& obj)
 {
